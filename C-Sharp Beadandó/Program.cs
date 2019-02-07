@@ -8,8 +8,14 @@ namespace C_Sharp_Beadandó
 {
     class Program
     {
+        public Program() {
+            Console.WriteLine("Hello world!");
+            Console.ReadKey();
+        }
+
         static void Main(string[] args)
         {
+            new Program();
         }
     }
 }
