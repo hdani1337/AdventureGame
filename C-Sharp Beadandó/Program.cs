@@ -9,6 +9,7 @@ namespace C_Sharp_Beadandó
     class Program
     {
         public static byte gold = 0;
+        public static byte firecracker = 0;
         public static byte attack = 10;
         public static byte hungryness = 0;
         public static Boolean dead = false;
@@ -621,12 +622,6 @@ namespace C_Sharp_Beadandó
                 lada();
             }
 
-            if (!valasz.Equals("Feladom") && !valasz.Equals("Help"))
-            {
-                wrongAnswer();
-                borond();
-            }
-
             if (valasz.Equals("Statisztika"))
             {
                 stats();
@@ -646,9 +641,244 @@ namespace C_Sharp_Beadandó
                 Console.ReadKey();
                 dead = true;
             }
+
+            else
+            {
+                wrongAnswer();
+                borond();
+            }
         }
 
         public void lada() {
+            Console.WriteLine("A ládában találsz 7 petárdát. Sebzési értékük 5.");
+            firecracker = 7;
+            hungryness += 3;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Ettől a sok kalandtól az éhséged " + hungryness + ". szintre nőtt. Lassan kéne enni valamit.");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Szeretnél ételt keresni?");
+            Console.Write("(");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Igen");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("/");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Nem");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(")");
+
+            ladaKajaDontes();
+        }
+
+        public void ladaKajaDontes() {
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                Console.WriteLine("Két irányba indulhatsz el ételt keresni.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Balra találsz egy üres táborhelyet.");
+                Console.WriteLine("Jobbra pedig egy gyümölcsöst veszel észre.");
+                Console.ForegroundColor = ConsoleColor.White;
+                kajaKereses();
+            }
+
+            if (valasz.Equals("Nem"))
+            {
+                Console.WriteLine("Útközben találkozol egy medvével.");
+                Console.WriteLine("Támadási értéke 40.");
+                Console.WriteLine("Megtámadod?");
+                Console.Write("(");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Igen");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("/");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Nem");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(")");
+                maciLaci();
+            }
+
+            if (valasz.Equals("Help"))
+            {
+                help();
+                ladaKajaDontes();
+            }
+
+            if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                ladaKajaDontes();
+            }
+
+            if (valasz.Equals("Feladom"))
+            {
+                Console.WriteLine("Majd legközelebb!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                ladaKajaDontes();
+            }
+        }
+
+        public void kajaKereses() {
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Balra"))
+            {
+                Console.WriteLine("A táborban találtál pár tápláló konzervet, így az éhséges 0-ra csökken.");
+                hungryness = 0;
+                Console.WriteLine("A lakoma miatt elálmosodsz, és alszol egyet.");
+                Console.WriteLine("A homokos parton ébredsz. Ott, ahol kezdted a kalandot.\nFogalmad sincs, hogy hogyan kerültél vissza.");
+                Console.WriteLine("Minden holmid és " + dogName + " is veled van.");
+                if (pickaxe)
+                {
+                    Console.WriteLine("Mivel van nálad csákány, megtudod mászni a sziklát.");
+                }
+
+                if (!pickaxe)
+                {
+                    //to be continued...
+                }
+            }
+
+            if (valasz.Equals("Jobbra"))
+            {
+                Console.WriteLine("A gyümölcsösben elfogyasztasz pár körtét és epret.");
+                hungryness -= 2;
+                Console.WriteLine("Az éhséged " + hungryness + ". szintre csökkent.");
+                Console.WriteLine("A friss gyümölcstől hirtelen egy kis energiára kaptál.");
+                Console.WriteLine("Játszol egy kicsit " + dogName + "val?");
+                gameWithDog();
+            }
+
+            if (valasz.Equals("Help"))
+            {
+                help();
+                kajaKereses();
+            }
+
+            if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                kajaKereses();
+            }
+
+            if (valasz.Equals("Feladom"))
+            {
+                Console.WriteLine("Majd legközelebb!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                kajaKereses();
+            }
+        }
+
+        public void gameWithDog() {
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                Console.WriteLine(dogName + " nagyon örült a játéknak.");
+                Console.WriteLine("Támadási ereje 5-tel növekedett.");
+                attack += 5;
+                //to be continued...
+
+            }
+
+            if (valasz.Equals("Nem"))
+            {
+                Console.WriteLine("Tovább folytatjátok az utatokat.");
+                //to be continued...
+
+            }
+
+            if (valasz.Equals("Help"))
+            {
+                help();
+                gameWithDog();
+            }
+
+            if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                gameWithDog();
+            }
+
+            if (valasz.Equals("Feladom"))
+            {
+                Console.WriteLine("Majd legközelebb!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                gameWithDog();
+            }
+        }
+
+        public void maciLaci() {
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                battle(attack,40);
+
+                if (!dead) {
+                    Console.WriteLine(dogName + " ismét valami szagot fog, úgyhogy elindulsz utána.");
+                    Console.WriteLine("Pár keselyű teteméhez vezet. Valami baljós közeleg.");
+                   //to be continued...
+
+                }
+            }
+
+            if (valasz.Equals("Nem"))
+            {
+                Console.WriteLine("Megpróbálsz elmenekülni, de a medve észrevesz és hátbatámad.");
+                Console.WriteLine("Meghaltál, vége a játéknak.");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            if (valasz.Equals("Help"))
+            {
+                help();
+                maciLaci();
+            }
+
+            if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                maciLaci();
+            }
+
+            if (valasz.Equals("Feladom"))
+            {
+                Console.WriteLine("Majd legközelebb!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                maciLaci();
+            }
         }
 
         public void pilotData() {
@@ -710,6 +940,14 @@ namespace C_Sharp_Beadandó
             }
                 if (!torch)
                 {
+                    Console.WriteLine(" - ??? (Ismeretlen tárgy)");
+                }
+
+            if (firecracker != 0)
+            {
+                Console.WriteLine(" - " + firecracker + " darab petárda");
+            }
+                if (firecracker == 0) {
                     Console.WriteLine(" - ??? (Ismeretlen tárgy)");
                 }
 
