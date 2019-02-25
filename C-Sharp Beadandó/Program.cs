@@ -16,6 +16,7 @@ namespace C_Sharp_Beadandó
         public static Boolean pickaxe = false;
         public static Boolean torch = false;
         public static Boolean map = false;
+        public static Random random = new Random();
         public static string playerName;
         public static string dogName = "";
         public static string place;
@@ -352,6 +353,7 @@ namespace C_Sharp_Beadandó
             if (valasz.Equals("Balra"))
             {
                 Console.WriteLine("Eszel az almából, aminek tápértéke 2. Ezután elindulsz a dombhoz.");
+                Console.WriteLine("A dombon túl egy pumát pillantasz meg. Támadási értéke 30. megtámadod? (Igen/Nem)");
                 hungryness -= 2;
                 puma();
             }
@@ -359,6 +361,7 @@ namespace C_Sharp_Beadandó
             if (valasz.Equals("Jobbra"))
             {
                 Console.WriteLine("A botokból és kövekből lándzsát készítesz, így támadási értéked 15-tel növekszik! Ezután elindulsz a dombhoz.");
+                Console.WriteLine("A dombon túl egy pumát pillantasz meg. Támadási értéke 30. megtámadod? (Igen/Nem)");
                 attack += 15;
                 puma();
             }
@@ -679,6 +682,8 @@ namespace C_Sharp_Beadandó
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Balra találsz egy üres táborhelyet.");
                 Console.WriteLine("Jobbra pedig egy gyümölcsöst veszel észre.");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Merre mész? (Balra/Jobbra)");
                 Console.ForegroundColor = ConsoleColor.White;
                 kajaKereses();
             }
@@ -740,6 +745,7 @@ namespace C_Sharp_Beadandó
                 if (pickaxe)
                 {
                     Console.WriteLine("Mivel van nálad csákány, megtudod mászni a sziklát.");
+                    //to be continued...
                 }
 
                 if (!pickaxe)
@@ -793,6 +799,11 @@ namespace C_Sharp_Beadandó
                 Console.WriteLine(dogName + " nagyon örült a játéknak.");
                 Console.WriteLine("Támadási ereje 5-tel növekedett.");
                 attack += 5;
+                Console.WriteLine("Tovább folytatjátok az utatokat.");
+                Console.WriteLine("Egy hídhoz érkeztek.");
+                Console.WriteLine("Pár tartógerendája már repedt vagy eltörött. Régóta nem tartja karban senki.");
+                Console.WriteLine("Átmentek rajta? (Igen/Nem)");
+                hid();
                 //to be continued...
 
             }
@@ -800,6 +811,10 @@ namespace C_Sharp_Beadandó
             if (valasz.Equals("Nem"))
             {
                 Console.WriteLine("Tovább folytatjátok az utatokat.");
+                Console.WriteLine("Egy hídhoz érkeztek.");
+                Console.WriteLine("Pár tartógerendája már repedt vagy eltörött. Régóta nem tartja karban senki.");
+                Console.WriteLine("Átmentek rajta? (Igen/Nem)");
+                hid();
                 //to be continued...
 
             }
@@ -831,6 +846,61 @@ namespace C_Sharp_Beadandó
             }
         }
 
+        public void hid() {
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                byte luck = (byte)random.Next(1, 10);
+
+                if (luck <= 5)
+                {
+                    Console.WriteLine("Sikeresen átkeltél a hídon.");
+                    //to be continued...
+                }
+
+                else
+                {
+                    Console.WriteLine("Sajnos leestél a hídról.");
+                    Console.WriteLine("Vége a játéknak.");
+                    Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                    Console.ReadKey();
+                    dead = true;
+                }
+            }
+
+            if (valasz.Equals("Nem"))
+            {
+                Console.WriteLine("Megtorpansz a hídnál.");
+            }
+
+            if (valasz.Equals("Help"))
+            {
+                help();
+                hid();
+            }
+
+            if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                hid();
+            }
+
+            if (valasz.Equals("Feladom"))
+            {
+                Console.WriteLine("Majd legközelebb!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                hid();
+            }
+        }
+
         public void maciLaci() {
             string valasz = Console.ReadLine();
 
@@ -841,8 +911,9 @@ namespace C_Sharp_Beadandó
                 if (!dead) {
                     Console.WriteLine(dogName + " ismét valami szagot fog, úgyhogy elindulsz utána.");
                     Console.WriteLine("Pár keselyű teteméhez vezet. Valami baljós közeleg.");
-                   //to be continued...
-
+                    Console.WriteLine("Besötétül az ég, és egy tornádó jelenik meg mögötted.");
+                    Console.WriteLine("Elkezdesz futni? (Igen/Nem)");
+                    tornado();
                 }
             }
 
@@ -878,6 +949,51 @@ namespace C_Sharp_Beadandó
             {
                 wrongAnswer();
                 maciLaci();
+            }
+        }
+
+        public void tornado() {
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                Console.WriteLine("A menekülés közben elesel, s halálos sebet kapsz.");
+                Console.WriteLine("Vége a játéknak!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            if (valasz.Equals("Nem"))
+            {
+                Console.WriteLine("A tornádó elragad magával, s egy ismeretlen helyen földet érsz.");
+                //to be continued...
+            }
+
+            if (valasz.Equals("Help"))
+            {
+                help();
+                tornado();
+            }
+
+            if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                tornado();
+            }
+
+            if (valasz.Equals("Feladom"))
+            {
+                Console.WriteLine("Majd legközelebb!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                tornado();
             }
         }
 
