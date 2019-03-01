@@ -27,9 +27,11 @@ namespace C_Sharp_Beadandó
         public Program()
         {
             if (!dead) {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Hogy hívnak?");
                 playerName = Console.ReadLine();
-                Console.WriteLine("\nÜdv " + playerName + "! Készen állsz egy kalandra? (Igen/Nem)");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("\nÜdv " + playerName + "! Készen állsz egy kalandra? (Igen/Nem) ");
                 introduction();
             }    
         }
@@ -39,23 +41,28 @@ namespace C_Sharp_Beadandó
             if (valasz.Equals("Igen"))
             {
                 place = "A Sziget";
-                mission = "Készíts egy fáklyát!";             
-                Console.WriteLine("Remek, kezdjünk is bele! (A ,,Help'' szóval bármikor kérhetsz segítséget)\nNyomj egy gombot a játék indításához!");
+                mission = "Készíts egy fáklyát!";
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\nSzabályok:");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(" - A válaszaidat a megadott formában add meg!");
+                Console.WriteLine(" - Minden egyes döntésed befolyásolja a játék menetét. Dönts bölcsen!");
+                Console.WriteLine(" - Ne feledd, néhol a sikeredet csak a szerencse fogja eldönteni!");
+                Console.WriteLine(" - A ,,Help'' szóval bármikor kérhetsz segítséget.");
+                Console.WriteLine("\nNyomj egy gombot a játék indításához!");
                 Console.ReadKey();
                 Console.Clear();
                 title(place);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Olyan furcsán érzed magad. Kinyitod a szemed, s egy szigeten találod magad furcsa öltözetben.\nKörülnézel, " +
                     "s támadt pár gondolatod.\n");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Balra melletted vannak ágak és zsinegek. Készíthetsz belőle fáklyát.");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Balra melletted vannak ágak és zsinegek. Készíthetsz belőle fáklyát.");
                 Console.WriteLine("Előtted van egy sötét barlang.");
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Jobbra pedig pár madár keres valami eledelt a homokban.");
 
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("\nMerre mész tovább? (Balra/Előre/Jobbra)");
+                Console.Write("\nMerre mész tovább? (Balra/Előre/Jobbra) ");
                 sziget();
             }
 
@@ -86,6 +93,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void sziget() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
             if (valasz.Equals("Balra")) {
@@ -97,16 +105,15 @@ namespace C_Sharp_Beadandó
                 Console.WriteLine("\nSikeresen elkészítetted a fáklyát!");
                 Console.ForegroundColor = ConsoleColor.White;
                 hungryness++;
-                Console.WriteLine("\nA munka miatt az éhséged " + hungryness + "-re nőtt. Vigyázz, ha az éhséged eléri a 10-es szintet, éhenhalsz!\n");
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Balra nem tudsz menni, mert arra a tenger van.");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Jobbra a barlang található.");
+                Console.WriteLine("\nA munka miatt az éhséged " + hungryness + "-re nőtt. Vigyázz, ha az éhséged eléri a 10-es szintet, éhenhalsz!\n");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Balra nem tudsz menni, mert arra a tenger van.");
+                Console.WriteLine("Jobbra a barlang található.");
                 Console.WriteLine("Előre pedig magas sziklák vannak.");
 
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("\nMerre tovább? (Balra/Előre/Jobbra)");
+                Console.Write("\nMerre tovább? (Balra/Előre/Jobbra) ");
                 sziget2();
             }
 
@@ -149,12 +156,14 @@ namespace C_Sharp_Beadandó
         }
 
         public void sziget2() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
             mission = "Kezdd el az utad!";
             if (valasz.Equals("Balra"))
             {
                 Console.WriteLine("Mégis bemész a vízbe, ám olyan mély, hogy azonnal lesüllyedsz az aljára és megfulladsz.");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
                 Console.ReadKey();
                 dead = true;
             }
@@ -166,11 +175,11 @@ namespace C_Sharp_Beadandó
                 title(place);
                 Console.WriteLine("\nBeértél a barlangba és meggyújtod a fákját. Azonnal kettéoszlik a barlang.\n");
 
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Balról kutyaugatást hallasz.");
                 Console.WriteLine("Jobbról gyenge fény pislákol.");
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("\nMerre mész? (Balra/Jobbra)");
+                Console.Write("\nMerre mész? (Balra/Jobbra)");
                 barlang();
             }
 
@@ -208,6 +217,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void barlang() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             if (valasz.Equals("Balra"))
             {
@@ -216,17 +226,9 @@ namespace C_Sharp_Beadandó
                 title(place);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("\nErőt veszel magadon, és elindulsz az ugatás felé." +
-                    "\nMeglepő, egy farkaskutya az, akinek beszorult a lába egy kő alá. Segítesz neki? ");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("(");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Igen");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("/");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Nem");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(")\n");
+                    "\nMeglepő, egy farkaskutya az, akinek beszorult a lába egy kő alá.");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("\nSegítesz neki? (Igen/Nem) "); 
                 farkas();
             }
 
@@ -266,6 +268,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void farkas() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             if (valasz.Equals("Igen"))
             {
@@ -317,6 +320,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void nameDog() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             if (valasz == "")
             {
@@ -334,7 +338,7 @@ namespace C_Sharp_Beadandó
             mission = "Döntsd el, hogy merre szeretnél menni!";
             title(place);
             Console.WriteLine("A fény egyre erősödik, s egy erdőbe érkezel.\n");
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Balra találsz egy almafát.");
             Console.WriteLine("Előre egy domb van.");
             Console.WriteLine("Jobbra pedig pár erősebb botot és köveket találsz.\n");
@@ -346,6 +350,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void erdo() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             place = "A puma árnyékában";
             mission = "A puma legyőzése";
@@ -400,6 +405,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void puma() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             byte pumaAttack = 15;
 
@@ -414,8 +420,7 @@ namespace C_Sharp_Beadandó
                         "Körülbelül fél óra séta után találsz egy holttestet.\n" +
                         "Az öltözetéből ítélve egy bányász volt.\n");
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine("Kirabolod? (Igen/Nem)");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\nKirabolod? (Igen/Nem) ");
                     place = "A bányász nyughelye";
                     mission = "Hozd meg a helyes döntést!";
                     Console.Title = "hdani1337-AdventureGame - " + place;
@@ -459,6 +464,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void holttest() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             if (valasz.Equals("Igen"))
             {
@@ -505,12 +511,13 @@ namespace C_Sharp_Beadandó
         public void helikopter() {
             Console.WriteLine("A tisztáson " + dogName + " valami szagot fogott, s elindul a forrása felé.\n" +
                 "Egy lezuhant helikopterhez vezet. Sehol senki, még egy holttestet sem találsz, azonban egy térképet igen.\n" +
-                "Ez a térkép néhány szigetet ábrázol, az egyik sziget úticélnak van megjelölve. Elteszed, hátha jól jön.\n" +
-                "Töröd a fejed egy próbán, beindítod a helikoptert?");
+                "Ez a térkép néhány szigetet ábrázol, az egyik sziget úticélnak van megjelölve. Elteszed, hátha jól jön.");
+            Console.Write("\nTöröd a fejed egy próbán, beindítod a helikoptert? (Igen/Nem) ");
             map = true;
             place = "A helikopter történetének nyomában";
             mission = "Döntsd el, hogy megéri-e engedni a kíváncsiságnak!";
             title(place);
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             if (valasz.Equals("Igen"))
             {
@@ -559,6 +566,7 @@ namespace C_Sharp_Beadandó
             place = "Keresés - 1.rész";
             mission = "Kutass nyomok után!";
             title(place);
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             if (valasz.Equals("Láda"))
             {
@@ -609,6 +617,10 @@ namespace C_Sharp_Beadandó
         }
 
         public void borond() {
+            place = "A bőrönd";
+            mission = "Fejtsd meg a kódot!";
+            title(place);
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
 
             if (!valasz.Equals("0323")) {
@@ -653,38 +665,30 @@ namespace C_Sharp_Beadandó
         }
 
         public void lada() {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("A ládában találsz 7 petárdát. Sebzési értékük 5.");
             firecracker = 7;
             hungryness += 3;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Ettől a sok kalandtól az éhséged " + hungryness + ". szintre nőtt. Lassan kéne enni valamit.");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Szeretnél ételt keresni?");
-            Console.Write("(");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Igen");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("/");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Nem");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(")");
-
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("\nSzeretnél ételt keresni? (Igen/Nem) ");
             ladaKajaDontes();
         }
 
         public void ladaKajaDontes() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
 
             if (valasz.Equals("Igen"))
             {
                 Console.WriteLine("Két irányba indulhatsz el ételt keresni.");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Balra találsz egy üres táborhelyet.");
                 Console.WriteLine("Jobbra pedig egy gyümölcsöst veszel észre.");
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Merre mész? (Balra/Jobbra)");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("\nMerre mész? (Balra/Jobbra) ");
+
                 kajaKereses();
             }
 
@@ -692,16 +696,9 @@ namespace C_Sharp_Beadandó
             {
                 Console.WriteLine("Útközben találkozol egy medvével.");
                 Console.WriteLine("Támadási értéke 40.");
-                Console.WriteLine("Megtámadod?");
-                Console.Write("(");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("Igen");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("/");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Nem");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(")");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("\nMegtámadod? (Igen/Nem) ");
+
                 maciLaci();
             }
 
@@ -733,6 +730,10 @@ namespace C_Sharp_Beadandó
         }
 
         public void kajaKereses() {
+            place = "Az éhség nagy úr";
+            mission = "Kutakodj étel után!";
+            title(place);
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
 
             if (valasz.Equals("Balra"))
@@ -792,6 +793,10 @@ namespace C_Sharp_Beadandó
         }
 
         public void gameWithDog() {
+            place = "Az ember legjobb barátja";
+            mission = "Hozz döntést!";
+            title(place);
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
 
             if (valasz.Equals("Igen"))
@@ -802,10 +807,9 @@ namespace C_Sharp_Beadandó
                 Console.WriteLine("Tovább folytatjátok az utatokat.");
                 Console.WriteLine("Egy hídhoz érkeztek.");
                 Console.WriteLine("Pár tartógerendája már repedt vagy eltörött. Régóta nem tartja karban senki.");
-                Console.WriteLine("Átmentek rajta? (Igen/Nem)");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("\nÁtmentek rajta? (Igen/Nem) ");
                 hid();
-                //to be continued...
-
             }
 
             if (valasz.Equals("Nem"))
@@ -813,10 +817,8 @@ namespace C_Sharp_Beadandó
                 Console.WriteLine("Tovább folytatjátok az utatokat.");
                 Console.WriteLine("Egy hídhoz érkeztek.");
                 Console.WriteLine("Pár tartógerendája már repedt vagy eltörött. Régóta nem tartja karban senki.");
-                Console.WriteLine("Átmentek rajta? (Igen/Nem)");
-                hid();
-                //to be continued...
-
+                Console.Write("\nÁtmentek rajta? (Igen/Nem) ");
+                hid();               
             }
 
             if (valasz.Equals("Help"))
@@ -847,6 +849,10 @@ namespace C_Sharp_Beadandó
         }
 
         public void hid() {
+            place = "A híd";
+            title(place);
+            mission = "Kelj át a hídon, sok szerencsét!";
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
 
             if (valasz.Equals("Igen"))
@@ -856,7 +862,14 @@ namespace C_Sharp_Beadandó
                 if (luck <= 5)
                 {
                     Console.WriteLine("Sikeresen átkeltél a hídon.");
-                    //to be continued...
+                    Console.WriteLine("Ismét elindulhatsz több irányba.");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("Balra egy kihalt tömbházat találsz.");
+                    Console.WriteLine("Előre egy kisboltot veszel észre.");
+                    Console.WriteLine("Jobbra pedig egy bunkerrel találkozol.");
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("\nMerre mész? (Balra/Előre/Jobbra) ");
+                    afterBridge();
                 }
 
                 else
@@ -901,7 +914,263 @@ namespace C_Sharp_Beadandó
             }
         }
 
+        public void afterBridge() {
+            place = "A híd után";
+            mission = "Döntsd el az úticélod!";
+            title(place);
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Balra"))//tömbház
+            {
+                Console.WriteLine("Beléptél a tömbházba. Melyik emeletre mész?");
+                tombhazText();
+            }
+
+            if (valasz.Equals("Előre"))//kisbolt
+            {
+                Console.WriteLine("Beléptél a kisboltba. Mit szeretnél venni?");
+                shopText();
+            }
+
+            if (valasz.Equals("Jobbra"))//bunker
+            {
+
+            }
+
+            if (valasz.Equals("Help"))
+            {
+                help();
+                afterBridge();
+            }
+
+            if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                afterBridge();
+            }
+
+            if (valasz.Equals("Feladom"))
+            {
+                Console.WriteLine("Majd legközelebb!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                afterBridge();
+            }
+        }
+
+        public void tombhazText() {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Emeletek:");
+            Console.WriteLine(" 1. emelet");
+            Console.WriteLine(" 2. emelet");
+            Console.WriteLine(" 3. emelet");
+            Console.WriteLine(" 4. emelet");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("\nEmelet: ");
+            tombhazText();
+        }
+
+        public void tombhaz() {
+            byte emelet = Convert.ToByte(Console.ReadLine());
+
+            switch (emelet)
+            {
+                case 1:
+                    {
+                        Console.WriteLine("Itt két szobát találsz.");
+                        Console.Write("Hányadik szobába mész?");
+                        byte szoba = Convert.ToByte(Console.ReadLine());
+
+                        switch (szoba)
+                        {
+                            case 1:
+                                {
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+
+                        break;
+                    }
+
+                case 2:
+                    {
+                        Console.WriteLine("Itt három szobát találsz.");
+                        Console.Write("Hányadik szobába mész?");
+
+                        byte szoba = Convert.ToByte(Console.ReadLine());
+
+                        switch (szoba)
+                        {
+                            case 1:
+                                {
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    break;
+                                }
+
+                            case 3:
+                                {
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+
+                        break;
+                    }
+
+                case 3:
+                    {
+                        Console.WriteLine("Itt egy szobát találsz");
+                        Console.Write("Bemész a szobába? (Igen/Nem) ");
+
+                        string szoba = Console.ReadLine();
+
+                        switch (szoba)
+                        {
+                            case "Igen":
+                                {
+                                    break;
+                                }
+
+                            case "Nem":
+                                {
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+
+                case 4:
+                    {
+                        Console.WriteLine("Itt három szobát találsz.");
+                        Console.Write("Hányadik szobába mész?");
+
+                        byte szoba = Convert.ToByte(Console.ReadLine());
+
+                        switch (szoba)
+                        {
+                            case 1:
+                                {
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    break;
+                                }
+
+                            case 3:
+                                {
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    break;
+                                }
+                        }
+
+                        break;
+                    }
+
+                default:
+                    {
+                        Console.WriteLine("Nincs ilyen emelet!");
+                        Console.Write("\nVálassz emeletet: ");
+                        tombhaz();
+                        break;
+                    }
+            }
+        }
+
+        public void shopText() {
+            place = "Gizi néni kisboltja";
+            mission = "Vegyél meg mindent amíg tart a Black Friday!";
+            title(place);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Válassz kategóriát!");
+            Console.WriteLine(" 1. Fegyverek");
+            Console.WriteLine(" 2. Ételek");
+            Console.WriteLine(" 3. Kiegészítők");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("\nKategória: ");
+            shop();
+        }
+
+        public void shop() {
+            byte kategoria = Convert.ToByte(Console.ReadLine());
+
+            switch (kategoria)
+            {
+                case 1:
+                    {
+                        Console.WriteLine("Kategória: Fegyverek");
+                        Console.WriteLine(" 1. Petárda (Sebzés: 5) (Ár: 1 arany)");
+                        Console.WriteLine(" 2. Balta (Sebzés: 40) (Ár: 8 arany)");
+                        break;
+                    }
+
+                case 2:
+                    {
+                        Console.WriteLine("Kategória: Ételek");
+                        Console.WriteLine(" 1. Barack (Tápérték: 1) (Ár: 1 arany)");
+                        Console.WriteLine(" 2. Kolbász (Tápérték: 2) (Ár: 2 arany)");
+                        Console.WriteLine(" 3. Pörkölt nokedlivel (Tápérték: Végtelen) (Ár: 5 arany)");
+                        break;
+                    }
+
+                case 3:
+                    {
+                        Console.WriteLine("Kategória: Kiegészítők");
+                        Console.WriteLine(" 1. Zárfeltörő (Darab: 5) (Ár: 2 arany)");
+                        Console.WriteLine(" 2. Gyufa (Darab: 20) (Ár: 1 arany)");
+                        break;
+                    }
+
+                default:
+                    {
+                        Console.WriteLine("Helytelen kategória!");
+                        Console.Write("\nVálassz kategóriát: ");
+                        shop();
+                        break;
+                    }
+            }
+        }
+
         public void maciLaci() {
+            place = "Medve László";
+            mission = "Győzd le a medvét!";
+            title(place);
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
 
             if (valasz.Equals("Igen"))
@@ -912,7 +1181,8 @@ namespace C_Sharp_Beadandó
                     Console.WriteLine(dogName + " ismét valami szagot fog, úgyhogy elindulsz utána.");
                     Console.WriteLine("Pár keselyű teteméhez vezet. Valami baljós közeleg.");
                     Console.WriteLine("Besötétül az ég, és egy tornádó jelenik meg mögötted.");
-                    Console.WriteLine("Elkezdesz futni? (Igen/Nem)");
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("\nElkezdesz futni? (Igen/Nem) ");
                     tornado();
                 }
             }
@@ -953,6 +1223,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void tornado() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
 
             if (valasz.Equals("Igen"))
