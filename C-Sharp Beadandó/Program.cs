@@ -11,11 +11,14 @@ namespace C_Sharp_Beadandó
         public static byte gold = 0;
         public static byte firecracker = 0;
         public static byte attack = 10;
+        public static byte lockpick = 0;
         public static byte hungryness = 0;
+        public static byte match = 0;
         public static Boolean dead = false;
         public static Boolean pickaxe = false;
         public static Boolean torch = false;
         public static Boolean map = false;
+        public static Boolean samanPorkolt = false;
         public static Random random = new Random();
         public static string playerName;
         public static string dogName = "";
@@ -48,6 +51,7 @@ namespace C_Sharp_Beadandó
                 Console.WriteLine(" - A válaszaidat a megadott formában add meg!");
                 Console.WriteLine(" - Minden egyes döntésed befolyásolja a játék menetét. Dönts bölcsen!");
                 Console.WriteLine(" - Ne feledd, néhol a sikeredet csak a szerencse fogja eldönteni!");
+                Console.WriteLine(" - Az esetleges politikai nézeteltérések miatt a fejlesztő nem vállal felelősséget.");
                 Console.WriteLine(" - A ,,Help'' szóval bármikor kérhetsz segítséget.");
                 Console.WriteLine("\nNyomj egy gombot a játék indításához!");
                 Console.ReadKey();
@@ -57,7 +61,7 @@ namespace C_Sharp_Beadandó
                 Console.WriteLine("Olyan furcsán érzed magad. Kinyitod a szemed, s egy szigeten találod magad furcsa öltözetben.\nKörülnézel, " +
                     "s támadt pár gondolatod.\n");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Balra melletted vannak ágak és zsinegek. Készíthetsz belőle fáklyát.");
+                Console.WriteLine("Balra melletted vannak ágak, zsinegek és egy gyufa. Készíthetsz belőle fáklyát.");
                 Console.WriteLine("Előtted van egy sötét barlang.");
                 Console.WriteLine("Jobbra pedig pár madár keres valami eledelt a homokban.");
 
@@ -101,6 +105,7 @@ namespace C_Sharp_Beadandó
                 mission = "Kezdd el az utad!";
                 title(place);
                 torch = true;
+                match += 1;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\nSikeresen elkészítetted a fáklyát!");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -174,7 +179,7 @@ namespace C_Sharp_Beadandó
                 mission = "Döntsd el, hogy merre szeretnél továbbmenni!";
                 title(place);
                 Console.WriteLine("\nBeértél a barlangba és meggyújtod a fákját. Azonnal kettéoszlik a barlang.\n");
-
+                match -= 1;
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Balról kutyaugatást hallasz.");
                 Console.WriteLine("Jobbról gyenge fény pislákol.");
@@ -667,6 +672,8 @@ namespace C_Sharp_Beadandó
         public void lada() {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("A ládában találsz 7 petárdát. Sebzési értékük 5.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Használatukhoz gyufa szükséges!");
             firecracker = 7;
             hungryness += 3;
             Console.ForegroundColor = ConsoleColor.Red;
@@ -978,6 +985,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void tombhaz() {
+            Console.ForegroundColor = ConsoleColor.Green;
             byte emelet = Convert.ToByte(Console.ReadLine());
 
             switch (emelet)
@@ -1136,6 +1144,52 @@ namespace C_Sharp_Beadandó
                         Console.WriteLine("Kategória: Fegyverek");
                         Console.WriteLine(" 1. Petárda (Sebzés: 5) (Ár: 1 arany)");
                         Console.WriteLine(" 2. Balta (Sebzés: 40) (Ár: 8 arany)");
+
+                        byte fegyver = Convert.ToByte(Console.ReadLine());
+
+                        switch (fegyver)
+                        {
+                            case 1:
+                                {
+                                    if (gold >= 1)
+                                    {
+                                        gold -= 1;
+                                        firecracker += 1;
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("Nincs elég pénzed a vásárláshoz.");
+                                    }
+
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    if (gold >= 8)
+                                    {
+                                        attack += 40;
+                                        gold -= 8;
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("Nincs elég pénzed a vásárláshoz.");
+                                    }
+
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    Console.WriteLine("Helytelen árucikk!");
+                                    Console.Write("\nKategória: ");
+                                    shop();
+                                    break;
+                                }
+                        }
+
                         break;
                     }
 
@@ -1145,6 +1199,87 @@ namespace C_Sharp_Beadandó
                         Console.WriteLine(" 1. Barack (Tápérték: 1) (Ár: 1 arany)");
                         Console.WriteLine(" 2. Kolbász (Tápérték: 2) (Ár: 2 arany)");
                         Console.WriteLine(" 3. Pörkölt nokedlivel (Tápérték: Végtelen) (Ár: 5 arany)");
+
+                        byte kaja = Convert.ToByte(Console.ReadLine());
+
+                        switch (kaja)
+                        {
+                            case 1:
+                                {
+                                    if (gold >= 1)
+                                    {
+                                        hungryness -= 1;
+                                        gold -= 1;
+                                        Console.WriteLine("Sikeresen vettél egy barackot.");
+                                        Console.WriteLine(gold + " aranyad maradt.");
+                                        Console.WriteLine("Éhségi szinted: " + hungryness);
+                                        shopContinue();
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("Nincs elég pénzed a vásárláshoz.");
+                                        Console.Write("\nKategória: ");
+                                        shop();
+                                    }
+
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    if (gold >= 2)
+                                    {
+                                        hungryness -= 2;
+                                        gold -= 2;
+                                        Console.WriteLine("Sikeresen vettél egy kolbászt.");
+                                        Console.WriteLine(gold + " aranyad maradt.");
+                                        Console.WriteLine("Éhségi szinted: " + hungryness);
+                                        shopContinue();
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("Nincs elég pénzed a vásárláshoz.");
+                                        Console.Write("\nKategória: ");
+                                        shop();
+                                    }
+
+                                    break;
+                                }
+
+                            case 3:
+                                {
+                                    if (gold >= 5)
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.WriteLine("Németh Szilárd sámán által főzött szent étel elfogyasztása után a játékmenet végéig nem leszel éhes!");
+                                        Console.WriteLine(gold + " aranyad maradt.");
+                                        hungryness = 0;
+                                        gold -= 5;
+                                        samanPorkolt = true;
+                                        shopContinue();
+                                    }
+                                    
+                                    else
+                                    {
+                                        Console.WriteLine("Nincs elég pénzed a vásárláshoz.");
+                                        Console.Write("\nKategória: ");
+                                        shop();
+                                    }
+
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    Console.WriteLine("Helytelen árucikk!");
+                                    Console.Write("\nKategória: ");
+                                    shop();
+                                    break;
+                                }
+                        }
+
                         break;
                     }
 
@@ -1153,6 +1288,62 @@ namespace C_Sharp_Beadandó
                         Console.WriteLine("Kategória: Kiegészítők");
                         Console.WriteLine(" 1. Zárfeltörő (Darab: 5) (Ár: 2 arany)");
                         Console.WriteLine(" 2. Gyufa (Darab: 20) (Ár: 1 arany)");
+
+                        byte egyebek = Convert.ToByte(Console.ReadLine());
+
+                        switch (egyebek)
+                        {
+                            case 1:
+                                {
+                                    if (gold >= 2)
+                                    {
+                                        lockpick += 5;
+                                        gold -= 2;
+                                        Console.WriteLine("Sikeresen vettél 5 zárfeltörőt.");
+                                        Console.WriteLine(gold + " aranyad maradt.");
+                                        shopContinue();
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("Nincs elég pénzed a vásárláshoz.");
+                                        Console.Write("\nKategória: ");
+                                        shop();
+                                    }
+
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    if (gold >= 1)
+                                    {
+                                        match += 20;
+                                        gold -= 1;
+                                        Console.WriteLine("Sikeresen vettél 20 gyufát.");
+                                        Console.WriteLine(gold + " aranyad maradt.");
+                                        shopContinue();
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("Nincs elég pénzed a vásárláshoz.");
+                                        Console.Write("\nKategória: ");
+                                        shop();
+                                    }
+
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    Console.WriteLine("Helytelen árucikk!");
+                                    Console.Write("\nKategória: ");
+                                    shop();
+                                    break;
+                                }
+                        }
+
                         break;
                     }
 
@@ -1163,6 +1354,26 @@ namespace C_Sharp_Beadandó
                         shop();
                         break;
                     }
+            }
+        }
+
+        public void shopContinue() {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("\nSzeretnéd folytatni a vásárlást? (Igen/Nem) ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen")) {
+                Console.Write("\nKategória: ");
+                shop();
+            }
+
+            if (valasz.Equals("Nem"))
+            {
+            }
+
+            else {
+                wrongAnswer();
             }
         }
 
@@ -1313,13 +1524,28 @@ namespace C_Sharp_Beadandó
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Vagyon: " + gold + " arany");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Éhség: " + hungryness);
+
+            if (!samanPorkolt)
+            {
+                Console.WriteLine("Éhség: " + hungryness);
+            }
+
+            else
+            {
+                Console.WriteLine("Elfogyasztottad Németh Szilárd sámán pörköltjét, így nem halhatsz éhen.");
+            }
+            
             Console.WriteLine("Támadási erő: " + attack);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Helyszín: " + place);
             Console.WriteLine("Küldetés: " + mission);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\nRendelkezésre álló tárgyak:");
+
+            if (match != 0)
+            {
+                Console.WriteLine(" - " + match + " darab gyufa");
+            }
 
             if (torch)
             {
@@ -1354,12 +1580,18 @@ namespace C_Sharp_Beadandó
                 Console.WriteLine(" - ??? (Ismeretlen tárgy)");
             }
 
-            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.Write("\nVálasz a Statisztika előtti kérdésre: ");
+
             Console.ForegroundColor = ConsoleColor.White;
         }
 
         public void wrongAnswer() {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\nHibás válasz. Kérlek, add meg újra a választ!");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Válasz: ");
         }
 
         static void Main(string[] args)
