@@ -19,6 +19,7 @@ namespace C_Sharp_Beadandó
         public static Boolean torch = false;
         public static Boolean map = false;
         public static Boolean samanPorkolt = false;
+        public static Boolean quest = false;
         public static Random random = new Random();
         public static string playerName;
         public static string dogName = "";
@@ -942,7 +943,10 @@ namespace C_Sharp_Beadandó
 
             if (valasz.Equals("Jobbra"))//bunker
             {
-
+                Console.WriteLine("Beléptél a bunkerbe.");
+                //balra legyenek valami kommunista propagandák
+                //jobbra legyen egy újabb folyosó
+                //előre pedig legyen egy bezárt ajtó
             }
 
             if (valasz.Equals("Help"))
@@ -992,6 +996,8 @@ namespace C_Sharp_Beadandó
             {
                 case 1:
                     {
+                        place = "Tömbház - 1. emelet";
+                        title(place);
                         Console.WriteLine("Itt két szobát találsz.");
                         Console.Write("Hányadik szobába mész?");
                         byte szoba = Convert.ToByte(Console.ReadLine());
@@ -1000,6 +1006,15 @@ namespace C_Sharp_Beadandó
                         {
                             case 1:
                                 {
+                                    Console.WriteLine("Itt egy síró törpével találkozol, akinek van egy feladata számodra.");
+                                    Console.WriteLine("A harmadik emeleten van egy nyúljelmezbe öltözött alak, aki elvette a játékmozdonyát.");
+                                    Console.WriteLine("Azt kéri, hogy szerezd neki vissza, mert ő túl kicsi hozzá.");
+                                    Console.WriteLine("30 aranyat ajánl jutalmul.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nElfogadod a küldetést? (Igen/Nem) ");
+
+                                    torpeQuest();
+
                                     break;
                                 }
 
@@ -1010,6 +1025,9 @@ namespace C_Sharp_Beadandó
 
                             default:
                                 {
+                                    Console.WriteLine("Nincs ilyen szoba!");
+                                    Console.Write("\nVálassz emeletet: ");
+                                    tombhaz();
                                     break;
                                 }
                         }
@@ -1019,6 +1037,8 @@ namespace C_Sharp_Beadandó
 
                 case 2:
                     {
+                        place = "Tömbház - 2. emelet";
+                        title(place);
                         Console.WriteLine("Itt három szobát találsz.");
                         Console.Write("Hányadik szobába mész?");
 
@@ -1043,6 +1063,9 @@ namespace C_Sharp_Beadandó
 
                             default:
                                 {
+                                    Console.WriteLine("Nincs ilyen szoba!");
+                                    Console.Write("\nVálassz emeletet: ");
+                                    tombhaz();
                                     break;
                                 }
                         }
@@ -1052,6 +1075,8 @@ namespace C_Sharp_Beadandó
 
                 case 3:
                     {
+                        place = "Tömbház - 3. emelet";//nyusziiii
+                        title(place);
                         Console.WriteLine("Itt egy szobát találsz");
                         Console.Write("Bemész a szobába? (Igen/Nem) ");
 
@@ -1066,11 +1091,16 @@ namespace C_Sharp_Beadandó
 
                             case "Nem":
                                 {
+                                    Console.Write("\nVálassz emeletet: ");
+                                    tombhaz();
                                     break;
                                 }
 
                             default:
                                 {
+                                    Console.WriteLine("Nincs ilyen válasz!");
+                                    Console.Write("\nVálassz emeletet: ");
+                                    tombhaz();
                                     break;
                                 }
                         }
@@ -1079,6 +1109,8 @@ namespace C_Sharp_Beadandó
 
                 case 4:
                     {
+                        place = "Tömbház - 4. emelet";
+                        title(place);
                         Console.WriteLine("Itt három szobát találsz.");
                         Console.Write("Hányadik szobába mész?");
 
@@ -1103,6 +1135,9 @@ namespace C_Sharp_Beadandó
 
                             default:
                                 {
+                                    Console.WriteLine("Nincs ilyen szoba!");
+                                    Console.Write("\nVálassz emeletet: ");
+                                    tombhaz();
                                     break;
                                 }
                         }
@@ -1115,6 +1150,38 @@ namespace C_Sharp_Beadandó
                         Console.WriteLine("Nincs ilyen emelet!");
                         Console.Write("\nVálassz emeletet: ");
                         tombhaz();
+                        break;
+                    }
+            }
+        }
+
+        public void torpeQuest() {
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Igen":
+                    {
+                        quest = true;
+                        Console.WriteLine("Elfogadtad a kihívást.");
+                        Console.WriteLine("Melyik emeletre mész tovább?");
+                        tombhaz();
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.WriteLine("A törpe annyira elkeseredik, hogy öngyilkos lesz.");
+                        Console.WriteLine("Melyik emeletre mész tovább?");
+                        quest = false;
+                        tombhaz();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        torpeQuest();
                         break;
                     }
             }
@@ -1142,8 +1209,8 @@ namespace C_Sharp_Beadandó
                 case 1:
                     {
                         Console.WriteLine("Kategória: Fegyverek");
-                        Console.WriteLine(" 1. Petárda (Sebzés: 5) (Ár: 1 arany)");
-                        Console.WriteLine(" 2. Balta (Sebzés: 40) (Ár: 8 arany)");
+                        Console.WriteLine(" 1. Petárda (Sebzés: 5) (Ár: 1 arany) (Darab: 3)");
+                        Console.WriteLine(" 2. Balta (Sebzés: 40) (Ár: 8 arany) (Darab: 1)");
 
                         byte fegyver = Convert.ToByte(Console.ReadLine());
 
@@ -1154,7 +1221,10 @@ namespace C_Sharp_Beadandó
                                     if (gold >= 1)
                                     {
                                         gold -= 1;
-                                        firecracker += 1;
+                                        firecracker += 3;
+                                        Console.WriteLine("Sikeresen vettél három petárdát.");
+                                        Console.WriteLine(firecracker + " darab petárdád van.");
+                                        Console.WriteLine(gold + " aranyad maradt.");
                                     }
 
                                     else
@@ -1171,6 +1241,9 @@ namespace C_Sharp_Beadandó
                                     {
                                         attack += 40;
                                         gold -= 8;
+                                        Console.WriteLine("Sikeresen vettél egy baltát.");
+                                        Console.WriteLine("Támadási értéked: " + attack);
+                                        Console.WriteLine(gold + " aranyad maradt.");
                                     }
 
                                     else
