@@ -244,6 +244,17 @@ namespace C_Sharp_Beadandó
                 place = "Az erdő";
                 title(place);
                 Console.WriteLine("Elindulsz a fény felé, ami egyre erősödik, s egy erdőbe érkezel.");
+                place = "Az erdő";
+                mission = "Döntsd el, hogy merre szeretnél menni!";
+                title(place);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Balra találsz egy almafát.");
+                Console.WriteLine("Előre egy domb van.");
+                Console.WriteLine("Jobbra pedig pár erősebb botot és köveket találsz.\n");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Furdal a kíváncsiság, hogy mi lehet a domb mögött, így csak EGYSZER választhatsz.\n" +
+                    "Dönts okosan! " +
+                    "Merre mész? (Balra/Előre/Jobbra)");
                 erdo();
             }
 
@@ -282,7 +293,8 @@ namespace C_Sharp_Beadandó
                 attack += 10;
                 hungryness += 1;
                 Console.WriteLine("Sikerült kiszabadítanod a farkast, aki azonnal odafut hozzád és örömében megnyalogat.\n" +
-                    "Hálájából veled tart az utadon. Milyen nevet adsz neki?");
+                    "Hálájából veled tart az utadon.");
+                Console.Write("Milyen nevet adsz neki? ");
                 nameDog();
                 Console.WriteLine("\nA támadási értéked " + attack + "-ra nőtt, ám az éhséged is " + hungryness + "-es szintre emelkedett!\n" +
                     dogName +" társaságában visszamész, s elindultok a fény felé.");
@@ -331,7 +343,7 @@ namespace C_Sharp_Beadandó
             string valasz = Console.ReadLine();
             if (valasz == "")
             {
-                Console.WriteLine("Adj egy nevet a kutyának!");
+                Console.Write("\nAdj egy nevet a kutyának! ");
                 nameDog();
             }
             else
@@ -984,10 +996,15 @@ namespace C_Sharp_Beadandó
             Console.WriteLine(" 2. emelet");
             Console.WriteLine(" 3. emelet");
             Console.WriteLine(" 4. emelet");
+            Console.WriteLine(" 5. kijárat");
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("\nEmelet: ");
             tombhaz();
         }
+
+        Boolean collectedFireckracker = false;
+        Boolean collectedMoney = false;
+        Boolean deadNyuszi = false;
 
         public void tombhaz() {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -1132,8 +1149,15 @@ namespace C_Sharp_Beadandó
                             case 2:
                                 {
                                     Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine("A szobában találsz 15 aranyat.");
-                                    gold += 15;
+                                    if (!collectedMoney)
+                                    {
+                                        Console.WriteLine("A szobában találsz 15 aranyat.");
+                                        gold += 15;
+                                        collectedMoney = true;
+                                    }
+                                    else {
+                                        Console.WriteLine("Már begyűjtötted az aranyat!");
+                                    }
                                     Console.ForegroundColor = ConsoleColor.Magenta;
                                     Console.Write("\nMelyik emeletre mész tovább?");
                                     tombhaz();
@@ -1181,12 +1205,22 @@ namespace C_Sharp_Beadandó
                             case "Igen":
                                 {
                                     Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine("Egy ijesztő nyúljelmezbe öltözött emberrel találkozol, aki azonnal feléd iramodik.");
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Támadási értéke 50.");
-                                    Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.Write("\nMegtámadod, vagy elfutsz előle? (Megtámadom/Elfutok)");
-                                    nyuszi();
+                                    if (!deadNyuszi)
+                                    {
+                                        Console.WriteLine("Egy ijesztő nyúljelmezbe öltözött emberrel találkozol, aki azonnal feléd iramodik.");
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.WriteLine("Támadási értéke 50.");
+                                        Console.ForegroundColor = ConsoleColor.Magenta;
+                                        Console.Write("\nMegtámadod, vagy elfutsz előle? (Megtámadom/Elfutok) ");
+                                        nyuszi();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Már legyőzted a nyulat!");
+                                        Console.ForegroundColor = ConsoleColor.Magenta;
+                                        Console.Write("\nMelyik emeletre mész tovább? ");
+                                        tombhaz();
+                                    }
                                     break;
                                 }
 
@@ -1212,7 +1246,7 @@ namespace C_Sharp_Beadandó
                     }
 
                 case 4:
-                    {
+                    {                       
                         place = "Tömbház - 4. emelet";
                         byte szoba = 0;
                         title(place);
@@ -1267,8 +1301,16 @@ namespace C_Sharp_Beadandó
                             case 3:
                                 {
                                     Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine("Ebben a szobában találsz 5 petárdát.");
-                                    firecracker += 5;
+                                    if (!collectedFireckracker)
+                                    {
+                                        Console.WriteLine("Ebben a szobában találsz 5 petárdát.");
+                                        firecracker += 5;
+                                        collectedFireckracker = true;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Már begyűjtötted a petárdákat!");
+                                    }                                  
                                     Console.ForegroundColor = ConsoleColor.Magenta;
                                     Console.Write("\nMelyik emeletre mész tovább?");
                                     tombhaz();
@@ -1286,6 +1328,19 @@ namespace C_Sharp_Beadandó
                                 }
                         }
 
+                        break;
+                    }
+
+                case 5:
+                    {
+                        Console.WriteLine("Ismét a híd után vagy.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Balra egy kihalt tömbházat találsz.");
+                        Console.WriteLine("Előre egy kisboltot veszel észre.");
+                        Console.WriteLine("Jobbra pedig egy bunkerrel találkozol.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("\nMerre mész? (Balra/Előre/Jobbra) ");
+                        afterBridge();
                         break;
                     }
 
@@ -1308,6 +1363,7 @@ namespace C_Sharp_Beadandó
             switch (valasz) {
                 case "Megtámadom": {
                         battle(attack,50);
+                        deadNyuszi = true;
                         if (!quest)
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -1419,6 +1475,7 @@ namespace C_Sharp_Beadandó
             Console.WriteLine(" 1. Fegyverek");
             Console.WriteLine(" 2. Ételek");
             Console.WriteLine(" 3. Kiegészítők");
+            Console.WriteLine(" 4. Kilépés");
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("\nKategória: ");
             shop();
@@ -1624,6 +1681,19 @@ namespace C_Sharp_Beadandó
                                         shop();
                                     }
 
+                                    break;
+                                }
+
+                            case 4:
+                                {
+                                    Console.WriteLine("Ismét a híd után vagy.");
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Balra egy kihalt tömbházat találsz.");
+                                    Console.WriteLine("Előre egy kisboltot veszel észre.");
+                                    Console.WriteLine("Jobbra pedig egy bunkerrel találkozol.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nMerre mész? (Balra/Előre/Jobbra) ");
+                                    afterBridge();
                                     break;
                                 }
 
