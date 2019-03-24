@@ -1184,10 +1184,17 @@ namespace C_Sharp_Beadandó
 
             if (valasz.Equals("Jobbra"))//bunker
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Beléptél a bunkerbe.");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 //balra legyenek valami kommunista propagandák
                 //jobbra legyen egy újabb folyosó
                 //előre pedig legyen egy bezárt ajtó
+                Console.WriteLine("Balra pár furcsa képet látsz.");
+                Console.WriteLine("Veled szemben egy ajtó van.");
+                Console.WriteLine("Jobbra egy másik folyosó van.");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Merre mész? (Balra/Előre/Jobbra) ");
                 bunker();
             }
 
@@ -1221,13 +1228,46 @@ namespace C_Sharp_Beadandó
         }
 
         public void bunker() {
+            Console.ForegroundColor = ConsoleColor.Green;
             string valasz = Console.ReadLine();
             switch (valasz) {
-                case "Jobbra": break;
+                case "Jobbra":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Elindulsz a folyosón.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Találkozol egy hajléktalannal, akinek küldetése van számodra.");
+                        Console.WriteLine("De mielőtt elmondaná, kíváncsi a politikai nézetedre.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Kommunista vagy vagy fasiszta? (Kommunista/Fasiszta) ");
+                        idealizmus();
+                        break;
+                    }
 
-                case "Balra": break;
+                case "Balra":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Itt kommunista propagandákat találsz.");
+                        break;
+                    }
 
-                case "Előre": break;
+                case "Előre":
+                    {
+                        Console.WriteLine("Az ajtó zárva van.");
+                        if (lockpick > 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Feltöröd? (Igen/Nem) ");
+                            closedDoor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Merre mész? (Balra/Jobbra) ");
+                            bunker();
+                        }
+                        break;
+                    }
 
                 case "Statisztika":
                     {
@@ -1250,6 +1290,347 @@ namespace C_Sharp_Beadandó
                         Console.ReadKey();
                         break;
                     }
+
+                default:
+                    {
+                        wrongAnswer();
+                        bunker();
+                        break;
+                    }
+            }
+        }
+
+        public void idealizmus()
+        {
+            place = "Politika tabuk nélkül";
+            title(place);
+            mission = "Légy őszinte!";
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Kommunista":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("A hajléktalan azonnal megörül a válaszodnak.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Megkaptad az Elvtárs címet!");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("+2 éhség!");
+                        hungryness += 2;
+                        if (hungryness >= 10)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Mivel az éhségi szinted " + hungryness + ", ezért éhenhaltál.");
+                            Console.WriteLine("Vége a játéknak!");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            playerName += " Elvtárs";
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Azzal bíz meg, hogy valósítsd meg a kommunizmust.");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Elfogadod a küldetést? (Igen/Nem) ");
+                            kommunizms();
+                        }
+                        break;
+                    }
+
+                case "Fasiszta":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("A hajléktalan elmondja, hogy ő kommunista, ezért megöl.");
+                        Console.WriteLine("Vége a játéknak!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        closedDoor();
+                        break;
+                    }
+                case "Help":
+                    {
+                        help();
+                        closedDoor();
+                        break;
+                    }
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        closedDoor();
+                        break;
+                    }
+            }
+        }
+
+        public void kommunizms()
+        {
+            place = "Sztálin 2.0";
+            title(place);
+            mission = "Hozz döntést!";
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Igen":
+                    {
+                        mission = "Valósítsd meg a kommunizmust, " + playerName+ "!";
+                        quest = true;
+                        //SOVIET ANTHEM GETS STRONGER
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("A hajléktalan dühös lesz, s megöl.");
+                        Console.WriteLine("Vége a játéknak!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        closedDoor();
+                        break;
+                    }
+                case "Help":
+                    {
+                        help();
+                        closedDoor();
+                        break;
+                    }
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        closedDoor();
+                        break;
+                    }
+
+            }
+        }
+
+        public void closedDoor()
+        {
+            place = "Az ajtó előtt";
+            title(place);
+            mission = "Hozz döntést!";
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+            
+            switch (valasz) {
+                case "Igen":
+                    {
+                        closedDoorLuck();
+                        break;
+                    }
+
+                case "Nem": {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Merre mész? (Balra/Jobbra) ");
+                        bunker();
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        closedDoor();
+                        break;
+                    }
+                case "Help":
+                    {
+                        help();
+                        closedDoor();
+                        break;
+                    }
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        closedDoor();
+                        break;
+                    }
+
+            }
+            
+        }
+
+        public void closedDoorLuck() {
+            byte luck = (byte)random.Next(1, 10);
+
+            if (luck <= 7)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Sikerült feltörnöd az ajtót!");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Két irányba indulhatsz el, balra és jobbra.");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("\nMerre mész (Balra/Jobbra) ");
+                inTheDoor();
+            }
+
+            else
+            {
+                lockpick--;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Nem sikerült feltörni az ajtót.");
+                if (lockpick > 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("Újrapróbálod? (Igen/Nem) ");
+                    string valasz = Console.ReadLine();
+                    switch (valasz) {
+                        case "Igen":
+                            {
+                                closedDoorLuck();
+                                break;
+                            }
+
+                        case "Nem":
+                            {
+                                Console.ForegroundColor = ConsoleColor.Magenta;
+                                Console.Write("Merre mész? (Balra/Jobbra) ");
+                                bunker();
+                                break;
+                            }
+
+                        case "Statisztika":
+                            {
+                                stats();
+                                closedDoorLuck();
+                                break;
+                            }
+                        case "Help":
+                            {
+                                help();
+                                closedDoorLuck();
+                                break;
+                            }
+                        case "Feladom":
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Majd legközelebb!");
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                                Console.ReadKey();
+                                break;
+                            }
+
+                        default:
+                            {
+                                wrongAnswer();
+                                closedDoorLuck();
+                                break;
+                            }
+
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("Merre mész? (Balra/Jobbra) ");
+                    bunker();
+                }
+            }
+        }
+
+        public void inTheDoor()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+            switch (valasz)
+            {
+                case "Balra":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Elindulnál, de nem veszed észre magad alatt a csapdát.");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Beleesel egy gödörbe, amiben felnyársalnak a tüskék, s meghalsz.");
+                        Console.WriteLine("Vége a játéknak!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "Jobbra":
+                    {
+                        //fasztudja mi lesz itt
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        closedDoor();
+                        break;
+                    }
+                case "Help":
+                    {
+                        help();
+                        inTheDoor();
+                        break;
+                    }
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        inTheDoor();
+                        break;
+                    }
+
             }
         }
 
@@ -2339,7 +2720,7 @@ namespace C_Sharp_Beadandó
         }
 
         public void wrongAnswer() {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\nHibás válasz. Kérlek, add meg újra a választ!");
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write("Válasz: ");
