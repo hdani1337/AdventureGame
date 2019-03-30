@@ -33,6 +33,7 @@ namespace C_Sharp_Beadandó
         public Program()
         {
             if (!dead) {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Hogy hívnak? ");
                 Console.ForegroundColor = ConsoleColor.Green;
                 playerName = Console.ReadLine();
@@ -3478,6 +3479,223 @@ namespace C_Sharp_Beadandó
                     }
 
                     default:
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Nincs ilyen emelet!");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("\nVálassz emeletet: ");
+                        tombhaz();
+                        break;
+                    }
+            }
+        }
+
+        public void school()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            byte emelet = 0;
+            try
+            {
+                emelet = Convert.ToByte(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\nSzámot kértem, nem szöveget!");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Válassz emeletet: ");
+                tombhaz();
+            }
+            catch (OverflowException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\nAz emelet száma nem lehet nagyobb 255-nél, mivel ez a byte maximum értéke!");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Válassz emeletet: ");
+                tombhaz();
+            }
+
+            switch (emelet)
+            {
+                case 1:
+                    {
+                        place = "Iskola - 1. emelet";
+                        title(place);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Itt két szobát találsz.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Hányadik szobába mész?");
+                        Console.ForegroundColor = ConsoleColor.Green;
+
+                        byte szoba = 0;
+                        try
+                        {
+                            szoba = Convert.ToByte(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("\nSzámot kértem, nem szöveget!");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Válassz emeletet: ");
+                            school();
+                        }
+                        catch (OverflowException)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("\nA szoba száma nem lehet nagyobb 255-nél, mivel ez a byte maximum értéke!");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Válassz emeletet: ");
+                            school();
+                        }
+
+                        switch (szoba)
+                        {
+                            case 1:
+                                {
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    Console.WriteLine("Ez a szoba üres.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    school();
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    Console.WriteLine("Nincs ilyen szoba!");
+                                    Console.Write("\nVálassz emeletet: ");
+                                    school();
+                                    break;
+                                }
+                        }
+
+                        break;
+                    }
+
+                case 2:
+                    {
+                        place = "Iskola - 2. emelet";
+                        title(place);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Itt három szobát találsz.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Hányadik szobába mész?");
+                        Console.ForegroundColor = ConsoleColor.Green;
+
+                        byte szoba = 0;
+                        try
+                        {
+                            szoba = Convert.ToByte(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("\nSzámot kértem, nem szöveget!");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Válassz emeletet: ");
+                            school();
+                        }
+                        catch (OverflowException)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("\nA szoba száma nem lehet nagyobb 255-nél, mivel ez a byte maximum értéke!");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Válassz emeletet: ");
+                            school();
+                        }
+
+                        switch (szoba)
+                        {
+                            case 1:
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Ez a szoba üres.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    school();
+                                    break;
+                                }
+
+                            case 2:
+                                {
+                                    break;
+                                }
+
+                            case 3:
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Ez a szoba üres.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    school();
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Nincs ilyen szoba!");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nVálassz emeletet: ");
+                                    school();
+                                    break;
+                                }
+                        }
+
+                        break;
+                    }
+
+                case 3:
+                    {
+                        place = "Iskola - 3. emelet";
+                        title(place);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Itt egy szobát találsz");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Bemész a szobába? (Igen/Nem) ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+
+                        string szoba = Console.ReadLine();
+
+                        switch (szoba)
+                        {
+                            case "Igen":
+                                {                                  
+                                    break;
+                                }
+
+                            case "Nem":
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nVálassz emeletet: ");
+                                    school();
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Nincs ilyen válasz!");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nVálassz emeletet: ");
+                                    tombhaz();
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+
+                case 4://kijárat
+                    { 
+                        break;
+                    }
+
+                default:
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Nincs ilyen emelet!");
