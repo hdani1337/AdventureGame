@@ -2812,6 +2812,8 @@ namespace C_Sharp_Beadandó
             }
         }
 
+        Boolean miniKnife = false;
+
         public void korhaz()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -3111,6 +3113,22 @@ namespace C_Sharp_Beadandó
 
                             case 2:
                                 {
+                                    if (!miniKnife)
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.WriteLine("Itt találtál egy szikét. Sebzési értéke 5.");
+                                        attack += 5;
+                                        miniKnife = true;
+                                        Console.WriteLine("Támadási értéked " + attack + ". szintre növekedett!");
+                                        Console.ForegroundColor = ConsoleColor.Magenta;
+                                        Console.Write("\nMelyik emeletre mész tovább?");
+                                        korhaz();
+                                    }
+                                    else
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.WriteLine("Már felvetted a szikét!");
+                                    }
                                     break;
                                 }
 
@@ -3174,6 +3192,11 @@ namespace C_Sharp_Beadandó
                         {
                             case 1:
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Ez a szoba üres.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    korhaz();
                                     break;
                                 }
 
@@ -3242,6 +3265,11 @@ namespace C_Sharp_Beadandó
                         {
                             case 1:
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Ez a szoba üres.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    korhaz();
                                     break;
                                 }
 
@@ -3310,6 +3338,11 @@ namespace C_Sharp_Beadandó
                         {
                             case 1:
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Ez a szoba üres.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    korhaz();
                                     break;
                                 }
 
@@ -3480,13 +3513,24 @@ namespace C_Sharp_Beadandó
 
                     case 11://kilépés a kórházból
                     {
-                        Console.WriteLine("Visszatértél a városba.");
-                        Console.WriteLine("Balra egy iskolát látsz.");
-                        Console.WriteLine("Előre egy játszóteret veszel észre.");
-                        Console.WriteLine("Jobbra pedig egy kórházat pillantasz meg");
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.Write("Merre mész? (Balra/Előre/Jobbra) ");
-                        deadCity();
+                        if (!superGoat)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Ismét a városban vagy, ám találkozol egy mutálódott kecskefejű emberrel.");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Támadási értéke 70. Megtámadod? (Igen/Nem) ");
+                            goatMan();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Visszatértél a városba.");
+                            Console.WriteLine("Balra egy iskolát látsz.");
+                            Console.WriteLine("Előre egy játszóteret veszel észre.");
+                            Console.WriteLine("Jobbra pedig egy kórházat pillantasz meg");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Merre mész? (Balra/Előre/Jobbra) ");
+                            deadCity();
+                        }
                         break;
                     }
 
@@ -3683,13 +3727,19 @@ namespace C_Sharp_Beadandó
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     Console.WriteLine("Ez a terem üres.");
                                     Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    Console.Write("Melyik emeletre mész tovább?");
                                     school();
                                     break;
                                 }
 
                             case 2:
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("Itt találtál 4 zárfeltörőt!");
+                                    lockpick += 4;
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("Melyik emeletre mész tovább? ");
+                                    school();
                                     break;
                                 }
 
@@ -3698,7 +3748,7 @@ namespace C_Sharp_Beadandó
                                     Console.ForegroundColor = ConsoleColor.Yellow;
                                     Console.WriteLine("Ez a terem üres.");
                                     Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.Write("\nMelyik emeletre mész tovább?");
+                                    Console.Write("\nMelyik emeletre mész tovább? ");
                                     school();
                                     break;
                                 }
@@ -3724,27 +3774,67 @@ namespace C_Sharp_Beadandó
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Itt négy termet találsz");
                         Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.Write("Hányadik terembe mész?" ");
+                        Console.Write("Hányadik terembe mész?" );
                         Console.ForegroundColor = ConsoleColor.Green;
 
-                        string terem = Console.ReadLine();
-
+                        byte terem = 0;
+                        try
+                        {
+                            terem = Convert.ToByte(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("\nSzámot kértem, nem szöveget!");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Válassz emeletet: ");
+                            school();
+                        }
+                        catch (OverflowException)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("\nA terem száma nem lehet nagyobb 255-nél, mivel ez a byte maximum értéke!");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Válassz emeletet: ");
+                            school();
+                        }
                         switch (terem)
                         {
-                            case "Igen":
+                            case 1:
                                 {                                  
                                     break;
                                 }
 
-                            case "Nem":
+                            case 2:
                                 {
+                                    break;
+                                }
+
+                            case 3:
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Cyan;
+                                    Console.WriteLine("Ez a terem egy könyvtár.");
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Egy jehova szertartás szemtanúja leszel.");
+                                    Console.WriteLine("\nVálasztási lehetőségeid:");
+                                    Console.WriteLine(" - 1. Elmenekülsz");
+                                    Console.WriteLine(" - 2. Csatlakozol közéjük");
+                                    Console.WriteLine(" - 3. Megtámadod őket (Sebzési értékük: 200)");
+                                    jehovak();
+                                    break;
+                                }
+
+                            case 4:
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("Ez a terem üres.");
                                     Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.Write("\nVálassz emeletet: ");
+                                    Console.Write("\nMelyik emeletre mész tovább? ");
                                     school();
                                     break;
                                 }
 
-                            default:
+                        default:
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Nincs ilyen válasz!");
@@ -3787,6 +3877,63 @@ namespace C_Sharp_Beadandó
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.Write("\nVálassz emeletet: ");
                         school();
+                        break;
+                    }
+            }
+        }
+
+        public void jehovak()
+        {
+            place = "Iskola - Könyvtár";
+            title(place);
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("Válasz: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            byte valasz = 0;
+            try
+            {
+                valasz = Convert.ToByte(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\nSzámot kértem, nem szöveget!");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Válasz: ");
+                school();
+            }
+            catch (OverflowException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\nA válasz száma nem lehet nagyobb 255-nél, mivel ez a byte maximum értéke!");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Válasz: ");
+                school();
+            }
+            switch (valasz)
+            {
+                case 1:
+                    {
+                        break;
+                    }
+
+                case 2:
+                    {
+                        break;
+                    }
+
+                case 3:
+                    {
+                        break;
+                    }
+
+                default:
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Nincs ilyen válasz!");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("\nVálasz: ");
+                        jehovak();
                         break;
                     }
             }
