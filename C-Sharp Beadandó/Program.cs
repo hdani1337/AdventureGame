@@ -3914,16 +3914,46 @@ namespace C_Sharp_Beadandó
             {
                 case 1:
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Mivel elmenekülsz, ezért éhség átkot küldenek rád.");
+                        hungryness += 5;                
+                        if (hungryness >= 10)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Mivel az éhségi szinted " + hungryness + ", ezért éhenhaltál.");
+                            newChance();
+                            jehovak();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Az éhséged 5-tel növekedett!");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("\nVálassz emeletet: ");
+                            school();
+                            break;
+                        }
                         break;
                     }
 
                 case 2:
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("A jehovák egy keresztes hadjáratot szerveznek a homoszexuálisok ellen.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Így is csatlakozol? (Igen/Nem) ");
+                        crusade();
                         break;
                     }
 
                 case 3:
-                    {
+                    {                      
+                        battle(attack, 200);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Sikeresen legyőzted a jehovákat!");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("\nVálassz emeletet: ");
+                        school();
                         break;
                     }
 
@@ -3934,6 +3964,61 @@ namespace C_Sharp_Beadandó
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.Write("\nVálasz: ");
                         jehovak();
+                        break;
+                    }
+            }
+        }
+
+        public void crusade()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Igen":
+                    {
+                        mission = "Time for a Crusade!";
+                        //keresztes hadjárat a buzik ellen
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Nem csatlakozol a jehovákhoz.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("\nVálassz emeletet: ");
+                        school();
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        crusade();
+                        break;
+                    }
+                case "Help":
+                    {
+                        help();
+                        crusade();
+                        break;
+                    }
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        crusade();
                         break;
                     }
             }
@@ -4211,6 +4296,10 @@ namespace C_Sharp_Beadandó
             }
             
             Console.WriteLine("Támadási erő: " + attack);
+            if (superGoat)
+            {
+                Console.WriteLine("A kecskefejű ember is végigkísér utadon.");
+            }
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Helyszín: " + place);
             Console.WriteLine("Küldetés: " + mission);
