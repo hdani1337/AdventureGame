@@ -3184,6 +3184,11 @@ namespace C_Sharp_Beadandó
                 case "Igen":
                     {
                         battle(attack, 300);
+                        Console.WriteLine("Sikeresen legyőzted a homoszexuálisokat!");
+                        Console.WriteLine("A jehovák hálájuk jeléül megmutatják neked az utat hazafelé.");
+                        Console.WriteLine("Annyit mondanak, hogy csípd meg a kezed.");
+                        Console.Write("Megteszed? (Igen/Nem) ");
+                        backToTheReality();
                         break;
                     }
 
@@ -3228,6 +3233,123 @@ namespace C_Sharp_Beadandó
                     {
                         wrongAnswer();
                         jatszoter();
+                        break;
+                    }
+            }
+        }
+
+        public void backToTheReality()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Igen":
+                    {
+                        if (!familyFriendly)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
+                            Console.WriteLine("Egy fürdőnadrág van rajtad.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Felállsz, s rájössz hogy egy strandon vagy, s mindez egy álom volt.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Megnyugodsz, bontasz egy hideg sört, s visszafekszel aludni.");
+                            Console.WriteLine("\nVége!\n");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\nNyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
+                            Console.WriteLine("Egy fürdőnadrág van rajtad.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Felállsz, s rájössz hogy egy strandon vagy, s mindez egy álom volt.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Megnyugodsz, iszol egy hideg jegesteát, s visszafekszel aludni.");
+                            Console.WriteLine("\nVége!\n");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\nNyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("A jehovák nagyon segítőkész emberek, ezért intézkednek helyetted.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Egyikük teljes erőből pofonvág.");
+
+                        if (!familyFriendly)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
+                            Console.WriteLine("Egy fürdőnadrág van rajtad.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Felállsz, s rájössz hogy egy strandon vagy, s mindez egy álom volt.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Megnyugodsz, bontasz egy hideg sört, s visszafekszel aludni.");
+                            Console.WriteLine("\nVége!\n");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\nNyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
+                            Console.WriteLine("Egy fürdőnadrág van rajtad.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Felállsz, s rájössz hogy egy strandon vagy, s mindez egy álom volt.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Megnyugodsz, iszol egy hideg jegesteát, s visszafekszel aludni.");
+                            Console.WriteLine("\nVége!\n");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\nNyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        backToTheReality();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        backToTheReality();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        backToTheReality();
                         break;
                     }
             }
@@ -3724,11 +3846,26 @@ namespace C_Sharp_Beadandó
                         {
                             case 1:
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine("Ez a szoba üres.");
-                                    Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.Write("\nMelyik emeletre mész tovább?");
-                                    korhaz();
+                                    if (jehovaQuest && familyFriendly)
+                                    {
+                                        jehovaCounter++;
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.WriteLine("Sikeresen megtaláltad az egyik vezetőt!");
+                                        Console.ForegroundColor = ConsoleColor.Cyan;
+                                        Console.WriteLine("Még " + (3-jehovaCounter) + " vezetőt kell megtalálnod!");
+                                        Console.ForegroundColor = ConsoleColor.Magenta;
+                                        Console.Write("\nMelyik emeletre mész tovább?");
+                                        korhaz();
+                                    }
+
+                                    else if (!jehovaQuest)
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Yellow;
+                                        Console.WriteLine("Ez a szoba üres.");
+                                        Console.ForegroundColor = ConsoleColor.Magenta;
+                                        Console.Write("\nMelyik emeletre mész tovább?");
+                                        korhaz();
+                                    }
                                     break;
                                 }
 
@@ -4594,7 +4731,14 @@ namespace C_Sharp_Beadandó
                 case "Igen":
                     {
                         jehovaQuest = true;
-                        mission = "Gyűjtsd össze a jehovák vezetőit!";                        
+                        mission = "Gyűjtsd össze a jehovák vezetőit!";
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Elfogadtad a küldetést.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("3 vezetőt kell összegyűjtened!");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("\nVálassz emeletet: ");
+                        school();
                         break;
                     }
 
