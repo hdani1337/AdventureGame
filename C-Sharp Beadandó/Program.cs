@@ -3036,7 +3036,8 @@ namespace C_Sharp_Beadandó
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Éhséged " + hungryness + ". szintre növekedett!");
-                    Console.WriteLine("Balra egy iskolát látsz.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nBalra egy iskolát látsz.");
                     Console.WriteLine("Előre egy játszóteret veszel észre.");
                     Console.WriteLine("Jobbra pedig egy kórházat pillantasz meg. ");
                     Console.ForegroundColor = ConsoleColor.Magenta;
@@ -3131,11 +3132,26 @@ namespace C_Sharp_Beadandó
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Itt találkozol az egyik jehova vezetővel!");
                                 jehovaCounter++;
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("Még " + (3 - jehovaCounter) + " vezetőt kell megtalálnod!");
-                                Console.ForegroundColor = ConsoleColor.Magenta;
-                                Console.Write("Merre mész? (Balra/Jobbra) ");
-                                deadCity();
+                                if (jehovaCounter == 3)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("Gratulálok, megtaláltad az összes vezetőt!");
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.WriteLine("A jehovák hálájuk jeléül megmutatják neked az utat hazafelé.");
+                                    Console.WriteLine("Annyit mondanak, hogy csípd meg a kezed.");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("Megteszed? (Igen/Nem) ");
+                                    backToTheReality();
+                                }
+
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Cyan;
+                                    Console.WriteLine("Még " + (3 - jehovaCounter) + " vezetőt kell megtalálnod!");
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
+                                    Console.Write("Merre mész? (Balra/Jobbra) ");
+                                    deadCity();
+                                }
                             }
                         }
                         break;
@@ -3184,9 +3200,12 @@ namespace C_Sharp_Beadandó
                 case "Igen":
                     {
                         battle(attack, 300);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Sikeresen legyőzted a homoszexuálisokat!");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("A jehovák hálájuk jeléül megmutatják neked az utat hazafelé.");
                         Console.WriteLine("Annyit mondanak, hogy csípd meg a kezed.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.Write("Megteszed? (Igen/Nem) ");
                         backToTheReality();
                         break;
@@ -3250,7 +3269,7 @@ namespace C_Sharp_Beadandó
                         if (!familyFriendly)
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("\nFelébredsz egy homokos parton.");
                             Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
                             Console.WriteLine("Egy fürdőnadrág van rajtad.");
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -3266,7 +3285,7 @@ namespace C_Sharp_Beadandó
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("\nFelébredsz egy homokos parton.");
                             Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
                             Console.WriteLine("Egy fürdőnadrág van rajtad.");
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -3291,7 +3310,7 @@ namespace C_Sharp_Beadandó
                         if (!familyFriendly)
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("\nFelébredsz egy homokos parton.");
                             Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
                             Console.WriteLine("Egy fürdőnadrág van rajtad.");
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -3307,7 +3326,7 @@ namespace C_Sharp_Beadandó
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("Felébredsz egy homokos parton.");
+                            Console.WriteLine("\nFelébredsz egy homokos parton.");
                             Console.WriteLine("Körülnézel, s egy furcsa öltözetben vagy.");
                             Console.WriteLine("Egy fürdőnadrág van rajtad.");
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -3849,13 +3868,29 @@ namespace C_Sharp_Beadandó
                                     if (jehovaQuest && familyFriendly)
                                     {
                                         jehovaCounter++;
-                                        Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine("Sikeresen megtaláltad az egyik vezetőt!");
-                                        Console.ForegroundColor = ConsoleColor.Cyan;
-                                        Console.WriteLine("Még " + (3-jehovaCounter) + " vezetőt kell megtalálnod!");
-                                        Console.ForegroundColor = ConsoleColor.Magenta;
-                                        Console.Write("\nMelyik emeletre mész tovább?");
-                                        korhaz();
+                                        if (jehovaCounter == 3)
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Gratulálok, megtaláltad az összes vezetőt!");
+                                            Console.ForegroundColor = ConsoleColor.Yellow;
+                                            Console.WriteLine("A jehovák hálájuk jeléül megmutatják neked az utat hazafelé.");
+                                            Console.WriteLine("Annyit mondanak, hogy csípd meg a kezed.");
+                                            Console.ForegroundColor = ConsoleColor.Magenta;
+                                            Console.Write("Megteszed? (Igen/Nem) ");
+                                            backToTheReality();
+                                        }
+                                        else
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Sikeresen megtaláltad az egyik vezetőt!");
+                                            Console.ForegroundColor = ConsoleColor.Cyan;
+                                            Console.WriteLine("Még " + (3 - jehovaCounter) + " vezetőt kell megtalálnod!");
+                                            Console.ForegroundColor = ConsoleColor.Yellow;
+                                            Console.WriteLine("Mikor hátat fordít neked a vezető, az I13-as feliratot veszed észre a hátán.");
+                                            Console.ForegroundColor = ConsoleColor.Magenta;
+                                            Console.Write("\nMelyik emeletre mész tovább?");
+                                            korhaz();
+                                        }
                                     }
 
                                     else if (!jehovaQuest)
@@ -4144,8 +4179,10 @@ namespace C_Sharp_Beadandó
 
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine("Visszatértél a városba.");
-                            Console.WriteLine("Balra egy iskolát látsz.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("\nBalra egy iskolát látsz.");
                             Console.WriteLine("Előre egy játszóteret veszel észre.");
                             Console.WriteLine("Jobbra pedig egy kórházat pillantasz meg");
                             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -4274,10 +4311,39 @@ namespace C_Sharp_Beadandó
 
                             case 3:
                                 {
-                                    Console.WriteLine("Ez a terem üres.");
-                                    Console.ForegroundColor = ConsoleColor.Magenta;
-                                    Console.Write("\nMelyik emeletre mész tovább?");
-                                    school();
+                                    if (!jehovaQuest)
+                                    {
+                                        Console.WriteLine("Ez a terem üres.");
+                                        Console.ForegroundColor = ConsoleColor.Magenta;
+                                        Console.Write("\nMelyik emeletre mész tovább?");
+                                        school();
+                                    }
+
+                                    else if (jehovaQuest && familyFriendly)
+                                    {
+                                        jehovaCounter++;
+                                        if (jehovaCounter == 3)
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Gratulálok, megtaláltad az összes vezetőt!");
+                                            Console.ForegroundColor = ConsoleColor.Yellow;
+                                            Console.WriteLine("A jehovák hálájuk jeléül megmutatják neked az utat hazafelé.");
+                                            Console.WriteLine("Annyit mondanak, hogy csípd meg a kezed.");
+                                            Console.ForegroundColor = ConsoleColor.Magenta;
+                                            Console.Write("Megteszed? (Igen/Nem) ");
+                                            backToTheReality();
+                                        }
+                                        else
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Sikeresen megtaláltad az egyik vezetőt!");
+                                            Console.ForegroundColor = ConsoleColor.Cyan;
+                                            Console.WriteLine("Még " + (3 - jehovaCounter) + " vezetőt kell megtalálnod!");
+                                            Console.ForegroundColor = ConsoleColor.Magenta;
+                                            Console.Write("\nMelyik emeletre mész tovább?");
+                                            school();
+                                        }
+                                    }
                                     break;
                                 }
 
