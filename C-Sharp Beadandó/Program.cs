@@ -4893,78 +4893,48 @@ namespace C_Sharp_Beadandó
             Console.WriteLine("\nStatisztika:\n");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Játékos neve: " + playerName);
-            if (dogName != "") {
-                Console.WriteLine("Játékos kutyájának neve: " + dogName);
-            }
+
+            if (dogName != "")  Console.WriteLine("Játékos kutyájának neve: " + dogName);
+            
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Vagyon: " + gold + " arany");
             Console.ForegroundColor = ConsoleColor.Red;
 
-            if (!samanPorkolt)
-            {
-                Console.WriteLine("Éhség: " + hungryness);
-            }
-
-            else
-            {
-                Console.WriteLine("Elfogyasztottad Németh Szilárd sámán pörköltjét, így nem halhatsz éhen.");
-            }
+            if (!samanPorkolt) Console.WriteLine("Éhség: " + hungryness);
+            else Console.WriteLine("Elfogyasztottad Németh Szilárd sámán pörköltjét, így nem halhatsz éhen.");
             
             Console.WriteLine("Támadási erő: " + attack);
-            if (superGoat)
-            {
-                Console.WriteLine("A kecskefejű ember is végigkísér utadon.");
-            }
+
+            if (superGoat) Console.WriteLine("A kecskefejű ember is végigkísér utadon.");
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Helyszín: " + place);
             Console.WriteLine("Küldetés: " + mission);
+
             if (jehovaQuest) Console.WriteLine("Összegyűjtött jehova vezetők: " + jehovaCounter + "/3");
+
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\nRendelkezésre álló tárgyak:");
 
-            if (match != 0)
-            {
-                Console.WriteLine(" - " + match + " darab gyufa");
-            }
+            if (match != 0) Console.WriteLine(" - " + match + " darab gyufa");
+            
 
-            if (torch)
-            {
-                Console.WriteLine(" - Fáklya");
-            }
-                if (!torch)
-                {
-                    Console.WriteLine(" - ??? (Ismeretlen tárgy)");
-                }
+            if (torch) Console.WriteLine(" - Fáklya");
+            else Console.WriteLine(" - ??? (Ismeretlen tárgy)");
 
-            if (firecracker != 0)
-            {
-                Console.WriteLine(" - " + firecracker + " darab petárda");
-            }
-                if (firecracker == 0) {
-                    Console.WriteLine(" - ??? (Ismeretlen tárgy)");
-                }
+            if (firecracker != 0) Console.WriteLine(" - " + firecracker + " darab petárda");
+            else Console.WriteLine(" - ??? (Ismeretlen tárgy)");
+                
 
-            if (pickaxe) {
-                Console.WriteLine(" - Csákány");
-            }
-                if (!pickaxe) {
-                    Console.WriteLine(" - ??? (Ismeretlen tárgy)");
-                }
+            if (pickaxe) Console.WriteLine(" - Csákány");
+            else Console.WriteLine(" - ??? (Ismeretlen tárgy)");
+                
 
-            if (map)
-            {
-                Console.WriteLine(" - Térkép");
-            }
-            if (!map)
-            {
-                Console.WriteLine(" - ??? (Ismeretlen tárgy)");
-            }
+            if (map) Console.WriteLine(" - Térkép");            
+            else Console.WriteLine(" - ??? (Ismeretlen tárgy)");
 
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            Console.Write("\nVálasz a Statisztika előtti kérdésre: ");
-
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("\nVálasz a Statisztika előtti kérdésre: ");            
         }
 
         public void wrongAnswer()
@@ -4979,22 +4949,9 @@ namespace C_Sharp_Beadandó
         {
             Console.Title = "hdani1337-AdventureGame";
             Console.SetWindowSize(120,40);
-            if (hungryness >= 10)
-            {
-                dead = true;
-            }
 
-            if (dead)
-            {
-                Console.WriteLine("Vége a játéknak!");
-                Console.WriteLine("\nNyomj egy gombot a kilépéshez...");
-                Console.ReadKey();
-            }
-
-            if (!dead)
-            {
-                new Program();
-            }
+            new Program();
+            
         }
     }
 }
