@@ -1551,6 +1551,11 @@ namespace C_Sharp_Beadandó
                         else
                         {
                             //keress neki ételt
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Nagyon éhes, ezért megkér, hogy keress neki ételt.");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Keresel neki ételt? (Igen/Nem) ");
+                            foodForHobo();
                         }
 
                         break;
@@ -1618,6 +1623,64 @@ namespace C_Sharp_Beadandó
                     {
                         wrongAnswer();
                         bunker();
+                        break;
+                    }
+            }
+        }
+
+        public void foodForHobo()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Igen":
+                    {
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Emiatt a hajléktalan nagyon dühös lesz, ezért megöl és felfalja a holttestedet!");
+                        newChance();
+                        if (folytatja)
+                        {
+                            foodForHobo();
+                            folytatja = false;
+                        }
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        foodForHobo();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        foodForHobo();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        foodForHobo();
                         break;
                     }
             }
