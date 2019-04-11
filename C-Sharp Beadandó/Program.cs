@@ -1219,11 +1219,20 @@ namespace C_Sharp_Beadandó
                 hungryness = 0;
                 Console.WriteLine("A lakoma miatt elálmosodsz, és alszol egyet.");
                 Console.WriteLine("A homokos parton ébredsz. Ott, ahol kezdted a kalandot.\nFogalmad sincs, hogy hogyan kerültél vissza.");
-                Console.WriteLine("Minden holmid és " + dogName + " is veled van.");
+
+                if (dogName != "") Console.WriteLine("Minden holmid és " + dogName + " is veled van.");
+                else Console.WriteLine("Minden holmid veled van.");
+
                 if (pickaxe)
                 {
                     Console.WriteLine("Mivel van nálad csákány, megtudod mászni a sziklát.");
                     //to be continued...
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ez az ág még nincs befejezve.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Folytatás hamarosan...");
+                    Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                    Console.ReadKey();
                 }
 
                 else
@@ -1265,10 +1274,12 @@ namespace C_Sharp_Beadandó
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Mivel nincs nálad egy darab gyufa sem, így nem tudod meggyújtani a fáklyát.");
                         Console.WriteLine("Mivel nem tudsz menni semerre sem, ezért meghalsz a szigeten.");
-                        Console.WriteLine("Vége a játéknak");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
-                        Console.ReadKey();
+                        newChance();
+                        if (folytatja)
+                        {
+                            kajaKereses();
+                            folytatja = false;
+                        }
                     }
                 }
             }
@@ -1431,6 +1442,12 @@ namespace C_Sharp_Beadandó
             {
                 Console.WriteLine("Megtorpansz a hídnál.");
                 //megkerülheti a hidat, harc egy szarvassal
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Ez az ág még nincs befejezve.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Folytatás hamarosan...");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                Console.ReadKey();
             }
 
             else if (valasz.Equals("Help"))
@@ -1567,11 +1584,23 @@ namespace C_Sharp_Beadandó
                         if (!familyFriendly)
                         {
                             Console.WriteLine("Itt kommunista propagandákat találsz.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Ez az ág még nincs befejezve.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Folytatás hamarosan...");
+                            Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                            Console.ReadKey();
                         }
 
                         else
                         {
                             Console.WriteLine("Itt újságokat találsz, amikben receptek vannak.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Ez az ág még nincs befejezve.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Folytatás hamarosan...");
+                            Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                            Console.ReadKey();
                         }
                         break;
                     }
@@ -1637,6 +1666,12 @@ namespace C_Sharp_Beadandó
             {
                 case "Igen":
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ez az ág még nincs befejezve.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Folytatás hamarosan...");
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                        Console.ReadKey();
                         break;
                     }
 
@@ -1789,6 +1824,13 @@ namespace C_Sharp_Beadandó
                     {
                         mission = "Valósítsd meg a kommunizmust, " + playerName+ "!";
                         quest = true;
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ez az ág még nincs befejezve.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Folytatás hamarosan...");
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                        Console.ReadKey();
                         //SOVIET ANTHEM GETS STRONGER
                         break;
                     }
@@ -2006,7 +2048,13 @@ namespace C_Sharp_Beadandó
 
                 case "Jobbra":
                     {
-                        //fasztudja mi lesz itt
+                        //nemtudom mi lesz itt
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ez az ág még nincs befejezve.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Folytatás hamarosan...");
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                        Console.ReadKey();
                         break;
                     }
 
