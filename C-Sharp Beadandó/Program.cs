@@ -368,7 +368,7 @@ namespace C_Sharp_Beadandó
                 place = "A barlang";
                 mission = "Döntsd el, hogy merre szeretnél továbbmenni!";
                 title(place);
-                Console.WriteLine("\nBeértél a barlangba és meggyújtod a fákját. Azonnal kettéoszlik a barlang.\n");
+                Console.WriteLine("\nBeértél a barlangba és meggyújtod a fáklyát. Azonnal kettéoszlik a barlang.\n");
                 match -= 1;
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Balról kutyaugatást hallasz.");
