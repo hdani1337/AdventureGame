@@ -2048,13 +2048,14 @@ namespace C_Sharp_Beadandó
 
                 case "Jobbra":
                     {
-                        //nemtudom mi lesz itt
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Ez az ág még nincs befejezve.");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Folytatás hamarosan...");
-                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
-                        Console.ReadKey();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Itt egy kalapos emberrel találkozol.");
+                        Console.WriteLine("Fogytán van a cigije, ezért megkér, hogy vegyél neki.");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Pár percre tőled van egy dohánybolt, még pont nyitva van.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Veszel neki cigit? (Igen/Nem) ");
+                        cigi();
                         break;
                     }
 
@@ -2086,6 +2087,70 @@ namespace C_Sharp_Beadandó
                     {
                         wrongAnswer();
                         inTheDoor();
+                        break;
+                    }
+
+            }
+        }
+
+        public void cigi()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+
+                case "Igen":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ez az ág még nincs befejezve.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Folytatás hamarosan...");
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ez az ág még nincs befejezve.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Folytatás hamarosan...");
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        cigi();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        cigi();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        cigi();
                         break;
                     }
 
