@@ -7,5 +7,5 @@ Felébredsz egy szigeten furcsa ruházattal. Soha életedben nem vennél fel ily
 
 <b>Mérföldkövek:</b>
   <li>Március 6 (Teljesítve)</li>
-  <li>Április 8</li>
+  <li>Április 8 (Teljesítve)</li>
   <li>Május 13 (befejezés)</li>
