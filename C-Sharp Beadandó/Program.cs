@@ -19,6 +19,7 @@ namespace C_Sharp_Beadandó
         public static Boolean familyFriendly = false;//Családbarát játékmód
         public static Boolean jehovaQuest = false;//Családbarát játékmód
         public static Boolean dead = false;
+        public static Boolean hivPositive = false;//:DDDDDDDDDDDDDD
         public static Boolean folytatja = false;
         public static Boolean pickaxe = false;//Csákány falmászáshoz
         public static Boolean torch = false;//Fáklya sötétben látáshoz
@@ -2114,12 +2115,13 @@ namespace C_Sharp_Beadandó
 
                 case "Nem":
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Ez az ág még nincs befejezve.");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Folytatás hamarosan...");
-                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
-                        Console.ReadKey();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Nem fogadtad el a küldetést, ezért tovább haladsz.");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Kicsivel később találsz egy telefont, ami csörög.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Ismeretlen hívóazonosító. Felveszed? (Igen/Nem) ");
+                        telefon();
                         break;
                     }
 
@@ -2155,6 +2157,245 @@ namespace C_Sharp_Beadandó
                     }
 
             }
+        }
+
+        public void telefon()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+
+                case "Igen":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("A telefonba egy ismerős hang szól bele.");
+                        Console.WriteLine("A kalapos úr az, akinek nem vettél cigit.");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Azt mondja, hogy hamarosan valami szörnyűség fog történni.");
+                        //nem családbarát: lespawnol egy prosti, ha nem dugod meg, megöl, ha megdugod, aidses leszel
+                        //családbarát: leszáll egy angyal és így szól: jajj de este én cigánybálba készülök, a babámmal egyet-kettőt pördülök
+                        if (!familyFriendly)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Ezután kicsit félve továbbindulsz, amíg bele nem botlasz egy prostituáltba.");
+                            Console.WriteLine("Megkérdezi, hogy lefekszel e vele. Az együttlét 5 aranyba kerül.");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Elfogadod az ajánlatot? (Igen/Nem) ");
+                            prosti();
+                        }                      
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Ez az ág még nincs befejezve.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Folytatás hamarosan...");
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        telefon();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        telefon();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        telefon();
+                        break;
+                    }
+
+            }
+        }
+
+        public void prosti()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+
+                case "Igen":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("Most fizetsz neki, vagy az együttlét után? (Most/Később) ");
+                        payProsti();
+                        break;
+                    }
+
+                case "Nem":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("A prosti ideges lesz, és megöl.");
+                        newChance();
+                        if (folytatja)
+                        {
+                            prosti();
+                            folytatja = false;
+                        }
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        prosti();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        prosti();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        prosti();
+                        break;
+                    }
+
+            }
+        }
+
+        public void payProsti()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+
+                case "Most":
+                    {
+                        if (gold >= 5)
+                        {
+                            gold -= 5;
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(gold + " aranyad maradt.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("AIDS-et kaptál! A játék további részében bármikor meghalhatsz!");
+                            hivPositive = true;
+                            afterHiv();
+                        }
+
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("A prosti ideges lesz, és megöl.");
+                            Console.WriteLine("Mivel nincs elég pénzed, ezért nincs értelme folytatnod a játékot.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+                        break;
+                    }
+
+                case "Később":
+                    {
+                        if (gold >= 5)
+                        {                 
+                            gold -= 5;
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(gold + " aranyad maradt.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("AIDS-et kaptál! A játék további részében bármikor meghalhatsz!");
+                            hivPositive = true;
+                            afterHiv();
+                        }
+
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("A prosti ideges lesz, és megöl.");
+                            Console.WriteLine("Mivel nincs elég pénzed, ezért nincs értelme folytatnod a játékot.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        payProsti();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        payProsti();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        payProsti();
+                        break;
+                    }
+
+            }
+        }
+
+        public void afterHiv()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Ez az ág még nincs befejezve.");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Folytatás hamarosan...");
+            Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+            Console.ReadKey();
         }
 
         public void tombhazText()
@@ -5360,6 +5601,8 @@ namespace C_Sharp_Beadandó
             else Console.WriteLine("Elfogyasztottad Németh Szilárd sámán pörköltjét, így nem halhatsz éhen.");
             
             Console.WriteLine("Támadási erő: " + attack);
+
+            if (hivPositive) Console.WriteLine("HIV fertőzött vagy!");
 
             if (superGoat) Console.WriteLine("A kecskefejű ember is végigkísér utadon.");
 
