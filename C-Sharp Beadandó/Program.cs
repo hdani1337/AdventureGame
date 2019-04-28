@@ -2104,12 +2104,11 @@ namespace C_Sharp_Beadandó
 
                 case "Igen":
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Ez az ág még nincs befejezve.");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Folytatás hamarosan...");
-                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
-                        Console.ReadKey();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("Elindulsz a dohányboltba.");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("A kasszás megkérdezi, hogy hány éves vagy. Életkorod: ");
+                        dohanybolt();
                         break;
                     }
 
@@ -2157,6 +2156,125 @@ namespace C_Sharp_Beadandó
                     }
 
             }
+        }
+
+        public void dohanybolt()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            byte kor = 0;
+
+            try
+            {
+                kor = Convert.ToByte(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\nSzámot kértem, nem szöveget!");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Életkorod: ");
+                dohanybolt();
+            }
+            catch (OverflowException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\nNe szórakozz légyszíves. Add meg a rendes életkorod.");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Életkorod: ");
+                dohanybolt();
+            }
+
+            if (kor < 18)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Kizavarnak a dohányboltból, elbuktad a küldetést.");
+                Console.WriteLine("A kalapos úr haragjában kioltja az életed.");
+                newChance();
+                if (folytatja)
+                {
+                    dohanybolt();
+                    folytatja = false;
+                }
+            }
+
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("A cigi 3 aranyba kerül. Megveszed? (Igen/Nem) ");
+                payDohanybolt();
+            }
+        }
+
+        public void payDohanybolt()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Igen":
+                    {
+                        if (gold >= 3)
+                        {
+                            gold -= 3;
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(gold + " aranyad maradt.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("A kalapos úrnak átadod a cigit, aki ezután egy angyallá változik.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Gratulál, hogy teljesítetted a sok nehéz próbatételt, majd hirtelen elsötétül a világ.");
+                            Console.WriteLine("Ezután felébredsz egy puha ágyban.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Körülnézel, s látod, hogy a saját lakásodban vagy, és csak álmodtad az egészet.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Gratulálok, befejezted a játékot!");
+                            Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("A kalapos úr ideges lesz, és megöl.");
+                            Console.WriteLine("Mivel nincs elég pénzed, ezért nincs értelme folytatnod a játékot.");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                            Console.ReadKey();
+                        }
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        payDohanybolt();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        payDohanybolt();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        payDohanybolt();
+                        break;
+                    }
+            }           
         }
 
         public void telefon()
