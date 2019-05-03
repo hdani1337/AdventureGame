@@ -2302,18 +2302,31 @@ namespace C_Sharp_Beadandó
                             Console.ForegroundColor = ConsoleColor.Magenta;
                             Console.Write("Elfogadod az ajánlatot? (Igen/Nem) ");
                             prosti();
-                        }                      
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Leszáll az égből egy angyal, s megkérdezi, hogy mit választasz.");
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write("Piros vagy kék pirula? (Piros/Kék) ");
+                            angyal();
+                        }
+
                         break;
                     }
 
                 case "Nem":
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("A telefoncsörgés elhallgat, majd hirtelen kattanásokat kezdesz el hallani.");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Ez az ág még nincs befejezve.");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Folytatás hamarosan...");
-                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
-                        Console.ReadKey();
+                        Console.WriteLine("Felrobban melletted egy bomba és meghalsz!");
+                        newChance();
+                        if (folytatja)
+                        {
+                            telefon();
+                            folytatja = false;
+                        }
                         break;
                     }
 
@@ -2345,6 +2358,72 @@ namespace C_Sharp_Beadandó
                     {
                         wrongAnswer();
                         telefon();
+                        break;
+                    }
+
+            }
+        }
+
+        public void angyal()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Piros":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("A piros tabletta bevételével azonnal meghaltál!");
+                        newChance();
+                        if (folytatja)
+                        {
+                            telefon();
+                            folytatja = false;
+                        }
+                        break;
+                    }
+
+                case "Kék":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Amint beveszed a kék tablettát, elemelkedsz a földtől.");
+                        Console.WriteLine("Felrepülsz a felhők közé, ahol egy tábla fogad.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("A felirat: Gratulálok, nyertél!");
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        angyal();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        angyal();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        angyal();
                         break;
                     }
 
