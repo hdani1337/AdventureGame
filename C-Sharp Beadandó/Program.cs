@@ -1441,14 +1441,12 @@ namespace C_Sharp_Beadandó
 
             else if (valasz.Equals("Nem"))
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Megtorpansz a hídnál.");
                 //megkerülheti a hidat, harc egy szarvassal
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Ez az ág még nincs befejezve.");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Folytatás hamarosan...");
-                Console.WriteLine("Nyomj egy gombot a kilépéshez!");
-                Console.ReadKey();
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Megkerülöd a hidat? (Igen/Nem) ");
+                areYouAnIdiot();
             }
 
             else if (valasz.Equals("Help"))
@@ -1477,6 +1475,284 @@ namespace C_Sharp_Beadandó
             {
                 wrongAnswer();
                 hid();
+            }
+        }
+
+        public void areYouAnIdiot()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Útközben találkozol egy szarvassal. Támadási értéke 50.");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Megtámadod? (Igen/Nem) ");
+                getAroundBridge();
+            }
+
+            else if (valasz.Equals("Nem"))
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Hülye vagy? Persze hogy megkerülöd.");
+                Console.WriteLine("Útközben találkozol egy szarvassal. Támadási értéke 50.");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Megtámadod? (Igen/Nem) ");
+                getAroundBridge();
+            }
+
+            else if (valasz.Equals("Help"))
+            {
+                help();
+                areYouAnIdiot();
+            }
+
+            else if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                areYouAnIdiot();
+            }
+
+            else if (valasz.Equals("Feladom"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Majd legközelebb!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                areYouAnIdiot();
+            }       
+        }
+
+        public void getAroundBridge()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                battle(attack, 50);
+                if (dead)
+                {
+                    newChance();
+                    if (folytatja)
+                    {
+                        getAroundBridge();
+                        folytatja = false;
+                    }
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Gratulálok, megölted a szarvast!");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Ezután megnyílik feletted az égbolt, s leereszkedik eléd egy csapat.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("A Kárpátia zenekar az, s megölnek, mivel megölted a csodaszarvast.");
+                    newChance();
+                    if (folytatja)
+                    {
+                        getAroundBridge();
+                        folytatja = false;
+                    }
+                }
+            }
+
+            else if (valasz.Equals("Nem"))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Elkezdesz menekülni a szarvas elől, majd hirtelen felébredsz.");
+                Console.WriteLine("A saját szobádban fekszel, éjjel 2 óra van.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Megkönnyebbülsz, hiszen álmodtad a az egészet.");
+                attack = 15;
+                dogName = "";
+                firecracker = 0;
+                match = 0;
+                hungryness = 0;
+                gold = 0;
+                pickaxe = false;
+                torch = false;
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("Visszafekszel aludni? (Igen/Nem) ");
+                backToSleep();
+            }
+
+            else if (valasz.Equals("Help"))
+            {
+                help();
+                getAroundBridge();
+            }
+
+            else if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                getAroundBridge();
+            }
+
+            else if (valasz.Equals("Feladom"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Majd legközelebb!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                getAroundBridge();
+            }
+        }
+
+        public void backToSleep()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                Console.WriteLine("Mivel visszafekszel aludni, nem hallod meg a betörőket.");
+                Console.WriteLine("Beosonnak a szobádba, s elvágják a torkodat.");
+                newChance();
+                if (folytatja)
+                {
+                    backToSleep();
+                    folytatja = false;
+                }
+            }
+
+            else if (valasz.Equals("Nem"))
+            {
+                Console.WriteLine("Betörők zaját hallod s egy kisbaba sírását.");
+                Console.WriteLine("Kimész a szobádból?");
+                runOut();
+            }
+
+            else if (valasz.Equals("Help"))
+            {
+                help();
+                backToSleep();
+            }
+
+            else if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                backToSleep();
+            }
+
+            else if (valasz.Equals("Feladom"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Majd legközelebb!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                backToSleep();
+            }
+        }
+
+        public void runOut()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            if (valasz.Equals("Igen"))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("A betörők támadási értéke 10.");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Megtámadod őket? (Igen/Nem) ");
+                intruders();
+            }
+
+            else if (valasz.Equals("Nem"))
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Mivel bentmaradsz a szobádban, a betörők megölik a kisbabát.");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Eztuán ismét mozgást hallasz, a szüleid azok.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Mivel nem segítettél a kisbabának, ezért megölnek téged.");
+                newChance();
+                if (folytatja)
+                {
+                    runOut();
+                    folytatja = false;
+                }
+            }
+
+            else if (valasz.Equals("Help"))
+            {
+                help();
+                runOut();
+            }
+
+            else if (valasz.Equals("Statisztika"))
+            {
+                stats();
+                runOut();
+            }
+
+            else if (valasz.Equals("Feladom"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Majd legközelebb!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+                dead = true;
+            }
+
+            else
+            {
+                wrongAnswer();
+                runOut();
+            }
+        }
+
+        public void intruders()//lose-lose
+        {
+            battle(attack, 10);
+            if (dead)
+            {//ez fizikailag lehetetlen
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("A betörők megöltek téged.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Vége a játéknak!");
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
+            }
+
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Gratulálok, legyőzted a betörőket és megvédted a kisbabát!");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Ezután bemész a szüleidhez közölni velük a hírt.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Rajta kapod őket szex közben.");
+                Console.WriteLine("Ez a látvány annyira megkárosította a lelkedet, hogy megölöd magad.");
+                Console.WriteLine("Vége a játéknak!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                Console.ReadKey();
             }
         }
 
@@ -5665,7 +5941,7 @@ namespace C_Sharp_Beadandó
                 else if (valasz.Equals("Help"))
                 {
                     help();
-                    battle(playerAttack,enemyAttack);
+                    battle(playerAttack, enemyAttack);
                 }
 
                 else if (valasz.Equals("Statisztika"))
@@ -5688,6 +5964,19 @@ namespace C_Sharp_Beadandó
                 {
                     wrongAnswer();
                     battle(playerAttack, enemyAttack);
+                }
+            }
+
+            else
+            {
+                if (playerAttack >= enemyAttack)
+                {
+                    dead = false;
+                }
+
+                if (playerAttack < enemyAttack)
+                {
+                    dead = true;
                 }
             }
      
