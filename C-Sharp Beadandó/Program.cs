@@ -1226,14 +1226,17 @@ namespace C_Sharp_Beadandó
 
                 if (pickaxe)
                 {
-                    Console.WriteLine("Mivel van nálad csákány, megtudod mászni a sziklát.");
-                    //to be continued...
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Ez az ág még nincs befejezve.");
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Folytatás hamarosan...");
-                    Console.WriteLine("Nyomj egy gombot a kilépéshez!");
+                    Console.WriteLine("Mivel van nálad csákány, megtudod mászni a sziklát.");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Megpillantod a csernobili atomerőművet, ami épp felrobban.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Két hét után meghalsz sugárfertőzésben.");                   
+                    Console.WriteLine("Vége a játéknak!");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Nyomj egy gombot a kilépéshez...");
                     Console.ReadKey();
+
                 }
 
                 else
@@ -1275,12 +1278,11 @@ namespace C_Sharp_Beadandó
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Mivel nincs nálad egy darab gyufa sem, így nem tudod meggyújtani a fáklyát.");
                         Console.WriteLine("Mivel nem tudsz menni semerre sem, ezért meghalsz a szigeten.");
-                        newChance();
-                        if (folytatja)
-                        {
-                            kajaKereses();
-                            folytatja = false;
-                        }
+                        Console.WriteLine("Vége a játéknak!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+
                     }
                 }
             }
@@ -2057,14 +2059,14 @@ namespace C_Sharp_Beadandó
                 case "Statisztika":
                     {
                         stats();
-                        closedDoor();
+                        idealizmus();
                         break;
                     }
 
                 case "Help":
                     {
                         help();
-                        closedDoor();
+                        idealizmus();
                         break;
                     }
 
@@ -2081,7 +2083,7 @@ namespace C_Sharp_Beadandó
                 default:
                     {
                         wrongAnswer();
-                        closedDoor();
+                        idealizmus();
                         break;
                     }
             }
@@ -2101,14 +2103,12 @@ namespace C_Sharp_Beadandó
                     {
                         mission = "Valósítsd meg a kommunizmust, " + playerName+ "!";
                         quest = true;
-
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Ez az ág még nincs befejezve.");
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Folytatás hamarosan...");
-                        Console.WriteLine("Nyomj egy gombot a kilépéshez!");
-                        Console.ReadKey();
-                        //SOVIET ANTHEM GETS STRONGER
+                        Console.WriteLine("Csatlakoztál az ÁVH-hoz!");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine("Mit teszel elsőnek? Bemész egy random házba ellenőrizni, besúgsz valakit, vagy beiszol?");
+                        Console.Write("(Ház/Besúgás/Részeg) ==>");
+                        avh();
                         break;
                     }
 
@@ -2128,14 +2128,14 @@ namespace C_Sharp_Beadandó
                 case "Statisztika":
                     {
                         stats();
-                        closedDoor();
+                        kommunizms();
                         break;
                     }
 
                 case "Help":
                     {
                         help();
-                        closedDoor();
+                        kommunizms();
                         break;
                     }
 
@@ -2152,7 +2152,90 @@ namespace C_Sharp_Beadandó
                 default:
                     {
                         wrongAnswer();
-                        closedDoor();
+                        kommunizms();
+                        break;
+                    }
+
+            }
+        }
+
+        public void avh()
+        {
+            place = "Államvédelmi hatóság";
+            title(place);
+            mission = "Hozz döntést!";
+            Console.ForegroundColor = ConsoleColor.Green;
+            string valasz = Console.ReadLine();
+
+            switch (valasz)
+            {
+                case "Ház":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("A ház tulajdonosa nem fél tőled, s agyonver.");
+                        newChance();
+                        if (folytatja)
+                        {
+                            avh();
+                            folytatja = false;
+                        }
+                        break;
+                    }
+
+                case "Besúgás":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Akit besúgsz, téged is besúg, s elvisz a Fekete Volga.");
+                        newChance();
+                        if (folytatja)
+                        {
+                            avh();
+                            folytatja = false;
+                        }
+                        break;
+                    }
+
+                case "Részeg":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Egy szolgálatban lévő ÁVH tiszt észrevesz, s elvisz a Fekete Volga.");
+                        newChance();
+                        if (folytatja)
+                        {
+                            avh();
+                            folytatja = false;
+                        }
+                        break;
+                    }
+
+                case "Statisztika":
+                    {
+                        stats();
+                        avh();
+                        break;
+                    }
+
+                case "Help":
+                    {
+                        help();
+                        avh();
+                        break;
+                    }
+
+                case "Feladom":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Majd legközelebb!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Nyomj egy gombot a kilépéshez...");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                default:
+                    {
+                        wrongAnswer();
+                        avh();
                         break;
                     }
 
